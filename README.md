@@ -25,8 +25,43 @@ datetime
 
 ### Installing
 
-To install RseqFilt run following command in the root folder,
+Clone or download RseqFilt using following command,
+
+```
+git clone https://github.com/reneshbedre/RseqFilt.git
+```
+
+To install RseqFilt, run following command in the root folder,
 
 ```
 python3 setup.py install
 ```
+
+### How to use
+
+Print help message to see all required and optional parameters,
+
+```
+filter.py -h
+```
+
+Filter single-end reads
+
+```
+# for single file
+filter.py OPTIONS -a fastq_file
+# for multiples files
+filter.py OPTIONS -a fastq_file_1,fastq_file_2
+```
+
+Filter paired-end reads
+```
+# for single file
+filter.py OPTIONS -a fastq_file_left -b fastq_file_right
+# for multiples files
+filter.py OPTIONS -a fastq_file_left_1,fastq_file_left_2 -b fastq_file_right_1,fastq_file_right_2
+```
+
+### License
+
+This project is available under the MIT License. See complete details in [LICENSE](LICENSE) file.
