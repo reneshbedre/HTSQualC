@@ -131,20 +131,17 @@ except ImportError:
 
 setup(
     name='filter',
-    # version=file("VERSION").readline(),
-    # packages=['numpy'],
     url='',
-    license='LSU',
+    license='MIT',
     author='Renesh Bedre',
-    author_email='renesh.bedre@agnet.tamu.edu',
-    description='Quality filtering analysis for RNA-seq data',
+    author_email='reneshbe@gmail.com',
+    description='RseqFilt: Quality filtering analysis for RNA-seq data',
     classifiers=[
-        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers'
         'Intended Audience :: Education',
         'Intended Audience :: End Users/Desktop',
         'Intended Audience :: Science/Research',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Operating System :: POSIX :: Linux',
         'Environment :: Console',
         'Topic :: Scientific/Engineering :: Bioinformatics',
@@ -156,8 +153,8 @@ setup(
              'ngsmodules/StatisticPair.py',
              'ngsmodules/common_functions.py',
              ],
-    requires=['numpy', 'python (>=2.5, <3.0)', 'itertools', 'csv', 'matplotlib', 'datetime', 'multiprocessing', 'math',
-              'collections', 'glob', 'shutil', 'pysam', 'MySQLdb', 'subprocess', 'termcolor'],
+    requires=['numpy', 'python (>=3)', 'itertools', 'csv', 'matplotlib', 'datetime', 'multiprocessing', 'math',
+              'collections', 'glob', 'shutil', 'pysam', 'subprocess', 'termcolor'],
 
 
 )
