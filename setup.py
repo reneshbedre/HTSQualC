@@ -1,10 +1,7 @@
 #!/usr/bin/python
 
 '''
-SRAP (Standalone RNA-Seq pipeline) is a fully standalone software pipeline developed using
-in-house developed scripts and open source bioinformatics tools using Python,
-matplotlib and Bash to analyze massive RNA-Seq data and other NGS applications
-in an efficient manner.
+RseqFilt is an automated sequence filtering analysis tool for a single and paired-end high throughput RNA-seq data generated from Illumina sequencing platforms.
 '''
 
 import sys
