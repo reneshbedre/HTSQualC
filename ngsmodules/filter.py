@@ -50,7 +50,7 @@ parser.add_argument('-m', '--ofmt', action='store', type=str, dest='out_fmt', he
                                                                                '[default:fastq]', default='fastq')
 parser.add_argument('-v', '--no-vis', action='store', type=str, dest='vis_opt', help='No figures will be produced '
                                                                                         '[yes|no] [default:no]',
-                    default='no')
+                    default='NULL')
 parser.add_argument('--version', action='version', version='%(prog)s 1.0')
 
 # print help message if no arguments provided
