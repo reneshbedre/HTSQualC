@@ -649,14 +649,6 @@ class FilterSingle:
 
     @staticmethod
     def usage():
-        print("\n##################################################################")
-        print("##\t\t\t\t\t\t\t\t##\n##\tProgram: SRAP \t\t\t\t\t\t##")
-        print("##\tVersion: 1.0 (2016)\t\t\t\t\t##")
-        print("##\tContact: Renesh Bedre <rbedre1@lsu.edu>,  LSU \t\t##\n##\t\t\t\t\t\t\t\t##")
-        print("##\tPurpose: Quality control Analysis of Single end\t\t##\n##\t\t RNA-Seq reads\t\t\t\t\t##")
-        print("##                                                              ##")
-        print("##################################################################")
-
         print("\nusage: srap -filter-s [options] -a fastq_file")
 
         print("\nOptions:")
