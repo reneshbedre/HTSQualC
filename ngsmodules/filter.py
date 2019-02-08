@@ -29,7 +29,7 @@ parser.add_argument('-e', '--nb', action='store', type=str, dest='n_cont', help=
 parser.add_argument('-f', '--adp', action='store', type=str, dest='adpt_seqs', help='Trim the adapter and '
                                                                                     'truncate the read '
                                                                                     'sequence. Multiple adapter sequences'
-                                                                                    'must be separated by comma',
+                                                                                    ' must be separated by comma',
                     default='NULL')
 parser.add_argument('-d', '--msz', action='store', type=int, dest='min_size', help='Filter the reads which are lesser '
                                                                                       'than minimum size', default=0)
@@ -68,15 +68,11 @@ if len(sys.argv) < 2:
 
 results = parser.parse_args()
 
-
-# for single end
-#if len(fastq_files) == 1:
-#    fastq_files_path = os.path.abspath(fastq_files)
-#else:
-#    fastq_files_path = os.path.abspath(fastq_files[0])
-
 # run single-end filtering if --p2 is not provided
 if results.input_files_2 is None:
+    if results.input_files_1 is None:
+        print(colored("Error: input file is missing \n", "red"))
+        sys.exit(1)
     fastq_files = results.input_files_1.split(',')
     for file in fastq_files:
         # print("Filtering reads:", file)
