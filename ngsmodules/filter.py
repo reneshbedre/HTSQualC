@@ -24,13 +24,14 @@ parser.add_argument('-c', '--qfmt', action='store', type=str, dest='qual_fmt', h
                                                                                     'provided, it will automatically '
                                                                                     'detected based on sequence data',
                     default='NULL')
-parser.add_argument('-e', '--nb', action='store', type=str, dest='n_cont', help='filter the reads containing given %% of '
-                                                                                'N', default=101)
-parser.add_argument('-f', '--adp', action='store', type=str, dest='adpt_seqs', help='Trim the adapter sequence and '
+parser.add_argument('-e', '--nb', action='store', type=str, dest='n_cont', help='Filter the reads containing given %% of '
+                                                                                'uncalled bases (N)', default=101)
+parser.add_argument('-f', '--adp', action='store', type=str, dest='adpt_seqs', help='Trim the adapter and '
                                                                                     'truncate the read '
-                                                                                    'sequence [adapter sequences]',
+                                                                                    'sequence. Multiple adapter sequences'
+                                                                                    'must be separated by comma',
                     default='NULL')
-parser.add_argument('-d', '--msz', action='store', type=int, dest='min_size', help='filter the reads which are lesser '
+parser.add_argument('-d', '--msz', action='store', type=int, dest='min_size', help='Filter the reads which are lesser '
                                                                                       'than minimum size', default=0)
 parser.add_argument('-g', '--per', action='store', type=float, dest='adpt_match', help='Truncate the read sequence if '
                                                                                        'it matches to '
