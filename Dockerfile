@@ -1,5 +1,5 @@
 # Dockerfile for RseqFilt container
-# load ubuntu
+# load ubuntu 18.04
 FROM ubuntu:18.04
 
 MAINTAINER Renesh Bedre (reneshbe@gmail.com)
