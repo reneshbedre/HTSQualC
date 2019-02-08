@@ -89,6 +89,9 @@ if results.input_files_2 is None:
             print(colored("Error: filtering exited with error status\n", "red"))
             sys.exit(1)
 else:
+    if results.input_files_2 is None:
+        print(colored("Error: right read input file is missing \n", "red"))
+        sys.exit(1)
     fastq_files_1 = results.input_files_1.split(',')
     fastq_files_2 = results.input_files_2.split(',')
     if len(fastq_files_1) != len(fastq_files_2):
