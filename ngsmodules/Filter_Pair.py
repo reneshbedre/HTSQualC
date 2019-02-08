@@ -15,6 +15,7 @@ from termcolor import colored
 import StatisticPair
 import common_functions
 import gzip
+from filter import parser
 
 
 class FilterPair:
@@ -127,7 +128,8 @@ class FilterPair:
         self.min_size = 0
         try:
             if len(sys.argv) == 1:
-                self.usage()
+                # self.usage()
+                parser.print_help()
                 sys.exit(1)
             option, args = getopt.getopt(sys.argv[1:], "ha:b:c:d:e:f:g:i:j:k:l:m:n:p:q:r:s:t:v:", ["p1=",
                                                                                                    "p2=",
@@ -150,12 +152,13 @@ class FilterPair:
                                                                                                    "no-vis="])
         except getopt.GetoptError:
             print(colored("\nError: wrong input parameter. check command\n", "red"))
-            self.usage()
+            # self.usage()
+            parser.print_help()
             sys.exit(1)
 
         for opt, value in option:
             if opt in ("-h", "--help"):
-                self.usage()
+                # self.usage()
                 sys.exit()
             elif opt in ("-a", "--p1"):
                 self.file_p1 = value
@@ -166,7 +169,8 @@ class FilterPair:
                 else:
                     print(colored("\nError : The given input file does not exist. Rerun the program by giving correct "
                                   "input file\n", "red"))
-                    self.usage()
+                    # self.usage()
+                    parser.print_help()
                     sys.exit(1)
             elif opt in ("-b", "--p2"):
                 self.file_p2 = value
@@ -219,7 +223,8 @@ class FilterPair:
                     self.no_vis = None
             else:
                 print(colored('Error: in input parameters\n', "red"))
-                self.usage()
+                # self.usage()
+                parser.print_help()
                 sys.exit(1)
 
         if 'gz' in self.file_p1:
@@ -251,7 +256,8 @@ class FilterPair:
 
         if self.Trim and self.win_size is None:
             print(colored("\n\nArgument Error: Provide valid Window size\n", "red"))
-            self.usage()
+            # self.usage()
+            parser.print_help()
         if self.qual_format is None:
             if self.file_p1 and self.file_p2 and os.path.isfile(self.file_p1) and os.path.isfile(self.file_p2):
                 print("["+str(datetime.now())+"] The fastq quality format is not provided therefore detecting the " \
@@ -259,7 +265,8 @@ class FilterPair:
                 self.qual_format = self.detect_fastq_variant()
             else:
                 print(colored("\nError: Input File Can not found\n", "red"))
-                self.usage()
+                # self.usage()
+                parser.print_help()
                 sys.exit()
             #   print "#################################################################"
             if self.qual_format == 1:

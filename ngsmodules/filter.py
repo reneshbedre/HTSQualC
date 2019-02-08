@@ -1,11 +1,8 @@
 
 import argparse
-import os
 import subprocess
 import sys
 from termcolor import colored
-
-
 
 parser = argparse.ArgumentParser(description="Quality filtering analysis of single and paired-end sequence data")
 
@@ -41,7 +38,7 @@ parser.add_argument('-i', '--qthr', action='store', type=int, dest='qual_thresh'
                                                                                        'average quality of bases in '
                                                                                        'reads is lower than threshold '
                                                                                        '(1-40) [default:20]', default=20)
-parser.add_argument('-n', '--trim', action='store', type=str, dest='trim_opt', help='If trim option set to true, the '
+parser.add_argument('-n', '--trim', action='store', type=str, dest='trim_opt', help='If trim option set to True, the '
                                                                                      'reads with low quality (as '
                                                                                      'defined by option --qthr) will be '
                                                                                      'trimmed instead of discarding [True|False] '
@@ -49,7 +46,7 @@ parser.add_argument('-n', '--trim', action='store', type=str, dest='trim_opt', h
 parser.add_argument('-p', '--wsz', action='store', type=int, dest='wind_size', help='The window size for trimming '
                                                                                       '(5->3) the reads. This option '
                                                                                       'should always set when -trim '
-                                                                                      'option is defined', default=5)
+                                                                                      'option is defined [default: 5]', default=5)
 parser.add_argument('-r', '--mlk', action='store', type=int, dest='min_len_filt', help='Minimum length of the reads '
                                                                                        'to retain after trimming',
                     default=0)

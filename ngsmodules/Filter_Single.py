@@ -15,6 +15,7 @@ from termcolor import colored
 import StatisticSingle
 import common_functions
 import subprocess
+from filter import parser
 
 
 class FilterSingle:
@@ -89,7 +90,8 @@ class FilterSingle:
     def __init__(self):
         try:
             if len(sys.argv) == 1:
-                self.usage()
+                # self.usage()
+                parser.print_help()
                 sys.exit(1)
             option, args = getopt.getopt(sys.argv[1:], "ha:b:c:d:e:f:g:i:j:k:l:m:n:p:q:r:s:t:u:v:", ["p1=",
                                                                                                      "p2=",
@@ -113,7 +115,8 @@ class FilterSingle:
                                                                                                      "no-vis="])
         except getopt.GetoptError:
             print(colored("\nError: wrong input parameter. check command\n", "red"))
-            self.usage()
+            # self.usage()
+            parser.print_help()
             sys.exit()
 
         for opt, value in option:
@@ -137,7 +140,8 @@ class FilterSingle:
                 else:
                     print(colored("\nError : The given input file does not exist. Rerun the program by giving correct "
                                   "input file\n", "red"))
-                    self.usage()
+                    # self.usage()
+                    parser.print_help()
                     sys.exit(1)
             elif opt in ("-c", "--qfmt"):
                 self.qual_format = value
@@ -212,7 +216,8 @@ class FilterSingle:
             self.file_1 = self.file_1_path
         if self.Trim and self.win_size is None:
             print(colored("\nArgument Error: Provide valid Window size\n", "red"))
-            self.usage()
+            # self.usage()
+            parser.print_help()
         if self.qual_format is None:
             if self.file_1 and os.path.isfile(self.file_1):
                 print("["+str(datetime.now())+"] The fastq quality format is not provided therefore detecting the " \
@@ -220,7 +225,8 @@ class FilterSingle:
                 self.qual_format = self.detect_fastq_variant()
             else:
                 print(colored("Error: Input File Can not found", "red"))
-                self.usage()
+                # self.usage()
+                parser.print_help()
                 sys.exit()
             if self.qual_format == 1:
                 print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.8+", "red"))
