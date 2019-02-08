@@ -71,7 +71,7 @@ results = parser.parse_args()
 if results.input_files_2 is None:
     fastq_files = results.input_files_1.split(',')
     for file in fastq_files:
-        print("Filtering reads:", file)
+        # print("Filtering reads:", file)
         p1 = subprocess.Popen(["Filter_Single.py", "--p1", str(file), "--qfmt", str(results.qual_fmt),
                                "--nb", str(results.n_cont), "--adp", str(results.adpt_seqs),
                                "--msz", str(results.min_size), "--per", str(results.adpt_match),
@@ -91,7 +91,7 @@ else:
         print(colored("Error: filtering exited with error status\nunequal number of files\n", "red"))
         sys.exit(1)
     for file1, file2 in zip(fastq_files_1, fastq_files_2):
-        print("Filtering reads:", file1, file2)
+        # print("Filtering reads:", file1, file2)
         p1 = subprocess.Popen(["Filter_Pair.py", "--p1", str(file1), "--p2", str(file2), "--qfmt",
                                str(results.qual_fmt), "--nb", str(results.n_cont), "--adp", str(results.adpt_seqs),
                                "--msz", str(results.min_size), "--per", str(results.adpt_match),
