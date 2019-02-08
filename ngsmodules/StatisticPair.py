@@ -303,16 +303,16 @@ class StatisticPair:
         elif QualFormat == 3:
             StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Quality format", "Sanger", "Sanger"))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total number of reads analyzed", self.RawReadCount, self.RawReadCount))
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total Bases in unfiltered reads (bp)", TotBases1, TotBases2))
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total Bases in filtered reads (bp)", TotBases1a, TotBases2a))
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Minimum size of unfiltered reads", MinLenRead1, MinLenRead2))
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Maximum size of unfiltered reads", MaxLenRead1, MaxLenRead2))
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Mean size of unfiltered reads", float(self.TotLenSum1/self.RawReadCount), float(self.TotLenSum2/self.RawReadCount)))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total Bases (ATGC) in unfiltered reads (bp)", TotBases1, TotBases2))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total Bases (ATGC) in filtered reads (bp)", TotBases1a, TotBases2a))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Minimum size (bp) of unfiltered reads", MinLenRead1, MinLenRead2))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Maximum size (bp) of unfiltered reads", MaxLenRead1, MaxLenRead2))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Mean size (bp) of unfiltered reads", float(self.TotLenSum1/self.RawReadCount), float(self.TotLenSum2/self.RawReadCount)))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Average Quality value for unfiltered reads", float(self.TotQual1Sum/TotBasesWithN1), float(self.TotQual2Sum/TotBasesWithN2)))
 
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Average Quality value for filtered reads", float(self.TotQual1aSum/  TotBasesWithN1a), float(self.TotQual2aSum/TotBasesWithN2a)))
         if MinSize:
-            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total number of reads below minimum size($minsize)", self.ShortReadCount1, self.ShortReadCount2))
+            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total number of reads below minimum size", self.ShortReadCount1, self.ShortReadCount2))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total unfiltered reads containing at least one uncalled base(N)", self.NcontReads1, self.NcontReads2))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total filtered reads containing at least one uncalled base(N)", self.NcontReads1a, self.NcontReads2a))
         if Nbase:
@@ -329,13 +329,13 @@ class StatisticPair:
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total filtered reads with >Q30 mean quality value ", Q301a, Q302a))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total number of reads kept", self.CleanReadCount, self.CleanReadCount))
         if Trim is None:
-            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Minimum size of filtered reads", MinLenRead1a, MinLenRead2a))
-            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Maximum size of filtered reads", MaxLenRead1a, MaxLenRead2a))
-            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Mean size of filtered reads", float(self.TotLenSuma1/self.CleanReadCount), float(self.TotLenSuma2/self.CleanReadCount)))
+            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Minimum size (bp) of filtered reads", MinLenRead1a, MinLenRead2a))
+            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Maximum size (bp) of filtered reads", MaxLenRead1a, MaxLenRead2a))
+            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Mean size (bp) of filtered reads", float(self.TotLenSuma1/self.CleanReadCount), float(self.TotLenSuma2/self.CleanReadCount)))
         else:
-            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Minimum size of filtered reads", MinLenRead1a, MinLenRead2a))
-            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Maximum size of filtered reads", MaxLenRead1a, MaxLenRead2a))
-            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Mean size of filtered reads", float(self.TotLenSuma1/self.CleanReadCount), float(self.TotLenSuma2/self.CleanReadCount)))
+            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Minimum size (bp) of filtered reads", MinLenRead1a, MinLenRead2a))
+            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Maximum size (bp) of filtered reads", MaxLenRead1a, MaxLenRead2a))
+            StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Mean size (bp) of filtered reads", float(self.TotLenSuma1/self.CleanReadCount), float(self.TotLenSuma2/self.CleanReadCount)))
 
         Remain = self.RawReadCount - self.CleanReadCount
         StatFile.write("\n\n\nThe total number of sequences removed:"+str(Remain)+"\n")

@@ -83,7 +83,7 @@ class FilterPair:
     pathname2 = None
     file_1_path = None
     file_2_path = None
-    Trim = None
+    Trim = 'False'
     CPU = 2
     n_base = 101
     Adapter = None
@@ -201,7 +201,7 @@ class FilterPair:
                 self.out_fmt = value
             elif opt in ('-n', "--trim"):
                 self.Trim = value
-                if self.Trim == 'NULL':
+                if self.Trim == 'False':
                     self.Trim = None
             elif opt in ("-p", "--wsz"):
                 self.win_size = int(value)

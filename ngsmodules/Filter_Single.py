@@ -61,7 +61,7 @@ class FilterSingle:
     n_read_ct_2 = 0
     file_1 = None
     pathname = None
-    Trim = None
+    Trim = 'False'
     CPU = 2
     n_base = 101
     adapter = None
@@ -158,7 +158,7 @@ class FilterSingle:
                 self.qual_thresh = int(value)
             elif opt in ('-n', "--trim"):
                 self.Trim = value
-                if self.Trim == 'NULL':
+                if self.Trim == 'False':
                     self.Trim = None
             elif opt in ("-j", "--mqual"):
                 self.min_qual = value

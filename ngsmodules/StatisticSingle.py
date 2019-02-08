@@ -254,11 +254,11 @@ class StatisticSingle:
         elif QualFormat == 3:
             StatFile.write("%-65s\t%s\n" % ("Quality format", "Sanger"))
         StatFile.write("%-65s\t%-20s\n" % ("Total number of reads analyzed", self.RawReadCount1))
-        StatFile.write("%-65s\t%-20s\n" % ("Total Bases in unfiltered reads (bp)", TotBases))
-        StatFile.write("%-65s\t%-20s\n" % ("Total Bases in filtered reads (bp)", TotBasesa))
-        StatFile.write("%-65s\t%-20s\n" % ("Minimum size of unfiltered reads", MinLenRead))
-        StatFile.write("%-65s\t%-20s\n" % ("Maximum size of unfiltered reads", MaxLenRead))
-        StatFile.write("%-65s\t%-20s\n" % ("Mean size of unfiltered reads",
+        StatFile.write("%-65s\t%-20s\n" % ("Total Bases (ATGC) in unfiltered reads (bp)", TotBases))
+        StatFile.write("%-65s\t%-20s\n" % ("Total Bases (ATGC) in filtered reads (bp)", TotBasesa))
+        StatFile.write("%-65s\t%-20s\n" % ("Minimum size (bp) of unfiltered reads", MinLenRead))
+        StatFile.write("%-65s\t%-20s\n" % ("Maximum size (bp) of unfiltered reads", MaxLenRead))
+        StatFile.write("%-65s\t%-20s\n" % ("Mean size (bp) of unfiltered reads",
                                            float(self.TotLenSum1/self.RawReadCount1)))
         StatFile.write("%-65s\t%.2f\n" % ("Average Quality value for unfiltered reads",
                                            float(self.TotQual1Sum/TotBasesWithN)))
@@ -289,12 +289,12 @@ class StatisticSingle:
         if Trim is None:
             # StatFile.write("%-65s\t%-20s\n" % ("Minimum size of filtered reads", MinLenRead))
             # StatFile.write("%-65s\t%-20s\n" % ("Maximum size of filtered reads", MaxLenRead))
-            StatFile.write("%-65s\t%-20s\n" % ("Mean size of filtered reads",
+            StatFile.write("%-65s\t%-20s\n" % ("Mean size (bp) of filtered reads",
                                                float(self.TotLenSuma1/self.CleanReadCount1)))
         else:
-            StatFile.write("%-65s\t%-20s\n" % ("Minimum size of filtered reads", MinLenReada))
-            StatFile.write("%-65s\t%-20s\n" % ("Maximum size of filtered reads", MaxLenReada))
-            StatFile.write("%-65s\t%-20s\n" % ("Mean size of filtered reads",
+            StatFile.write("%-65s\t%-20s\n" % ("Minimum size (bp) of filtered reads", MinLenReada))
+            StatFile.write("%-65s\t%-20s\n" % ("Maximum size (bp) of filtered reads", MaxLenReada))
+            StatFile.write("%-65s\t%-20s\n" % ("Mean size (bp) of filtered reads",
                                                float(self.TotLenSuma1/self.CleanReadCount1)))
 
         Remain = self.RawReadCount1 - self.CleanReadCount1

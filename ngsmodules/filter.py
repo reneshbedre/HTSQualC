@@ -44,8 +44,8 @@ parser.add_argument('-i', '--qthr', action='store', type=int, dest='qual_thresh'
 parser.add_argument('-n', '--trim', action='store', type=str, dest='trim_opt', help='If trim option set to true, the '
                                                                                      'reads with low quality (as '
                                                                                      'defined by option --qthr) will be '
-                                                                                     'trimmed instead of discarding '
-                                                                                     '[default: False]', default='NULL')
+                                                                                     'trimmed instead of discarding [True|False] '
+                                                                                     '[default: False]', default='False')
 parser.add_argument('-p', '--wsz', action='store', type=int, dest='wind_size', help='The window size for trimming '
                                                                                       '(5->3) the reads. This option '
                                                                                       'should always set when -trim '
