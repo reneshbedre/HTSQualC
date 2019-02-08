@@ -87,6 +87,9 @@ if results.input_files_2 is None:
 else:
     fastq_files_1 = results.input_files_1.split(',')
     fastq_files_2 = results.input_files_2.split(',')
+    if len(fastq_files_1) != len(fastq_files_2):
+        print(colored("Error: filtering exited with error status\nunequal number of files\n", "red"))
+        sys.exit(1)
     for file1, file2 in zip(fastq_files_1, fastq_files_2):
         print("Filtering reads:", file1, file2)
         p1 = subprocess.Popen(["Filter_Pair.py", "--p1", str(file1), "--p2", str(file2), "--qfmt",
@@ -101,8 +104,6 @@ else:
             print(colored("Error: filtering exited with error status\n", "red"))
             sys.exit(1)
 
-# for file in fastq_files:
-#    print(str(file))
 
 
 
