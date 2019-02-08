@@ -15,7 +15,6 @@ from termcolor import colored
 import StatisticPair
 import common_functions
 import gzip
-from filter import parser
 
 
 class FilterPair:

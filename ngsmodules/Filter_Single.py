@@ -15,8 +15,6 @@ from termcolor import colored
 import StatisticSingle
 import common_functions
 import subprocess
-from filter import parser
-
 
 class FilterSingle:
     hash_qual_1 = {}
