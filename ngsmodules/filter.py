@@ -9,10 +9,9 @@ from termcolor import colored
 
 parser = argparse.ArgumentParser(description="Quality filtering analysis of single and paired-end sequence data")
 
-parser.add_argument('-a', '--p1', action='store', type=str, dest='input_files_1', help='Input file (.fastq, .fq)',
+parser.add_argument('-a', '--p1', action='store', type=str, dest='input_files_1', help='Single end input files or left files for paired-end data (.fastq, .fq). Multiple sample files must be separated by ',' ',
                     default=None)
-parser.add_argument('-b', '--p2', action='store', type=str, dest='input_files_2', help='Right files for paired-end data '
-                                                                                       'input file (.fastq, .fq)',
+parser.add_argument('-b', '--p2', action='store', type=str, dest='input_files_2', help='Right files for paired-end data (.fastq, .fq). Multiple files must be separated by ',' ',
                     default=None)
 parser.add_argument('-c', '--qfmt', action='store', type=str, dest='qual_fmt', help='Quality value format '
                                                                                     '[1= Illumina 1.8, 2= Illumina 1.3,'
