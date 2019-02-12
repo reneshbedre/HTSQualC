@@ -66,48 +66,51 @@ if len(sys.argv) < 2:
 results = parser.parse_args()
 
 # run single-end filtering if --p2 is not provided
-if results.input_files_2 is None:
-    if results.input_files_1 is None:
-        print(colored("Error: input file is missing \n", "red"))
-        sys.exit(1)
-    fastq_files = results.input_files_1.split(',')
-    for file in fastq_files:
-        # print("Filtering reads:", file)
-        p1 = subprocess.Popen(["Filter_Single.py", "--p1", str(file), "--qfmt", str(results.qual_fmt),
-                               "--nb", str(results.n_cont), "--adp", str(results.adpt_seqs),
-                               "--msz", str(results.min_size), "--per", str(results.adpt_match),
-                               "--qthr", str(results.qual_thresh), "--trim", results.trim_opt,
-                               "--wsz", str(results.wind_size), "--mlk", str(results.min_len_filt),
-                               "--cpu", str(results.cpu), "--ofmt", str(results.out_fmt),
-                               "--no-vis", str(results.vis_opt)])
-
-        p1.wait()
-        if p1.returncode != 0:
-            print(colored("Error: filtering exited with error status\n", "red"))
-            sys.exit(1)
-else:
+try:
     if results.input_files_2 is None:
-        print(colored("Error: right read input file is missing \n", "red"))
-        sys.exit(1)
-    fastq_files_1 = results.input_files_1.split(',')
-    fastq_files_2 = results.input_files_2.split(',')
-    if len(fastq_files_1) != len(fastq_files_2):
-        print(colored("Error: filtering exited with error status\nunequal number of files\n", "red"))
-        sys.exit(1)
-    for file1, file2 in zip(fastq_files_1, fastq_files_2):
-        # print("Filtering reads:", file1, file2)
-        p1 = subprocess.Popen(["Filter_Pair.py", "--p1", str(file1), "--p2", str(file2), "--qfmt",
-                               str(results.qual_fmt), "--nb", str(results.n_cont), "--adp", str(results.adpt_seqs),
-                               "--msz", str(results.min_size), "--per", str(results.adpt_match),
-                               "--qthr", str(results.qual_thresh), "--trim", results.trim_opt,
-                               "--wsz", str(results.wind_size), "--mlk", str(results.min_len_filt),
-                               "--cpu", str(results.cpu), "--ofmt", str(results.out_fmt),
-                               "--no-vis", str(results.vis_opt)])
-        p1.wait()
-        if p1.returncode != 0:
-            print(colored("Error: filtering exited with error status\n", "red"))
+        if results.input_files_1 is None:
+            print(colored("Error: input file is missing \n", "red"))
             sys.exit(1)
+        fastq_files = results.input_files_1.split(',')
+        for file in fastq_files:
+            # print("Filtering reads:", file)
+            p1 = subprocess.Popen(["Filter_Single.py", "--p1", str(file), "--qfmt", str(results.qual_fmt),
+                                   "--nb", str(results.n_cont), "--adp", str(results.adpt_seqs),
+                                   "--msz", str(results.min_size), "--per", str(results.adpt_match),
+                                   "--qthr", str(results.qual_thresh), "--trim", results.trim_opt,
+                                   "--wsz", str(results.wind_size), "--mlk", str(results.min_len_filt),
+                                   "--cpu", str(results.cpu), "--ofmt", str(results.out_fmt),
+                                   "--no-vis", str(results.vis_opt)])
 
-
+            p1.wait()
+            if p1.returncode != 0:
+                print(colored("Error: filtering exited with error status\n", "red"))
+                sys.exit(1)
+    else:
+        if results.input_files_2 is None:
+            print(colored("Error: right read input file is missing \n", "red"))
+            sys.exit(1)
+        fastq_files_1 = results.input_files_1.split(',')
+        fastq_files_2 = results.input_files_2.split(',')
+        if len(fastq_files_1) != len(fastq_files_2):
+            print(colored("Error: filtering exited with error status\nunequal number of files\n", "red"))
+            sys.exit(1)
+        for file1, file2 in zip(fastq_files_1, fastq_files_2):
+            # print("Filtering reads:", file1, file2)
+            p1 = subprocess.Popen(["Filter_Pair.py", "--p1", str(file1), "--p2", str(file2), "--qfmt",
+                                   str(results.qual_fmt), "--nb", str(results.n_cont), "--adp", str(results.adpt_seqs),
+                                   "--msz", str(results.min_size), "--per", str(results.adpt_match),
+                                   "--qthr", str(results.qual_thresh), "--trim", results.trim_opt,
+                                   "--wsz", str(results.wind_size), "--mlk", str(results.min_len_filt),
+                                   "--cpu", str(results.cpu), "--ofmt", str(results.out_fmt),
+                                   "--no-vis", str(results.vis_opt)])
+            p1.wait()
+            if p1.returncode != 0:
+                print(colored("Error: filtering exited with error status\n", "red"))
+                sys.exit(1)
+except KeyboardInterrupt:
+    pass
+    print(colored("\nProgram is terminated by user", "red"))
+    sys.exit(1)
 
 
