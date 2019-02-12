@@ -289,10 +289,22 @@ class FilterPair:
             #   print "#################################################################"
         if self.qual_format == 1:
             print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.8+", "red"))
+            qfmt_verify = self.detect_fastq_variant()
+            if qfmt_verify != self.qual_format:
+                print(colored("\nError: Wrong quality format\n", "red"))
+                sys.exit(1)
         elif self.qual_format == 2:
             print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.3+", "red"))
+            qfmt_verify = self.detect_fastq_variant()
+            if qfmt_verify != self.qual_format:
+                print(colored("\nError: Wrong quality format\n", "red"))
+                sys.exit(1)
         elif self.qual_format == 3:
             print(colored("["+str(datetime.now())+"] The fastq quality format is Sanger", "red"))
+            qfmt_verify = self.detect_fastq_variant()
+            if qfmt_verify != self.qual_format:
+                print(colored("\nError: Wrong quality format\n", "red"))
+                sys.exit(1)
         else:
             print(colored("\nError: Wrong quality format\n", "red"))
             sys.exit(1)
