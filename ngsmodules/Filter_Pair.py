@@ -308,7 +308,6 @@ class FilterPair:
         else:
             print(colored("\nError: Wrong quality format\n", "red"))
             sys.exit(1)
-            #   print "#################################################################\n\n"
 
         self.hash_qual_1 = self.get_hash(2, 43)
         self.hash_qual_2 = self.get_hash(2, 43)
@@ -915,5 +914,6 @@ if __name__ == '__main__':
     try:
         Ob.filter_pair()
     except KeyboardInterrupt:
+        pass
         print(colored("\nProgram is terminated by user", "red"))
         sys.exit(1)
