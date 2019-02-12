@@ -15,6 +15,7 @@ from termcolor import colored
 import StatisticPair
 import common_functions
 import gzip
+import subprocess
 
 
 class FilterPair:
@@ -178,7 +179,7 @@ class FilterPair:
                     self.pathname2 = os.path.abspath(self.pathname2)
                     self.file_2_path = self.pathname2
             elif opt in ("-c", "--qfmt"):
-                self.qual_format = value
+                self.qual_format = int(value)
                 if self.qual_format == 'NULL':
                     self.qual_format = None
             elif opt in ("-d", "--msz"):
@@ -229,6 +230,14 @@ class FilterPair:
         if 'gz' in self.file_p1:
             print("["+str(datetime.now())+"] The fastq file is in gz format and uncompressing it...")
             self._gzip_1 = True
+            cmd = ["gunzip", self.file_p1]
+            p1 = subprocess.Popen(cmd)
+            p1.wait()
+            if p1.returncode != 0:
+                print(colored("Error: during uncompress file", "red"))
+                sys.exit(1)
+
+            '''
             read_file = gzip.GzipFile(self.file_p1, 'rb')
             temp = read_file.read()
             read_file.close()
@@ -239,9 +248,18 @@ class FilterPair:
             self.file_p1 = self.file_1_path+'/'+os.path.splitext(os.path.basename(self.file_p1))[0]
             #   to delete .fq file at end
             #   self.file_1_path = os.path.abspath(self.file_p1)
+            '''
 
         if 'gz' in self.file_p2:
             self._gzip_2 = True
+            cmd = ["gunzip", self.file_p2]
+            p1 = subprocess.Popen(cmd)
+            p1.wait()
+            if p1.returncode != 0:
+                print(colored("Error: during uncompress file", "red"))
+                sys.exit(1)
+
+            '''
             read_file = gzip.GzipFile(self.file_p2, 'rb')
             temp = read_file.read()
             read_file.close()
@@ -252,9 +270,10 @@ class FilterPair:
             self.file_p2 = self.file_2_path+'/'+os.path.splitext(os.path.basename(self.file_p2))[0]
             #   to delete .fq file at end
             #   self.file_2_path = os.path.abspath(self.file_p2)
+            '''
 
         if self.Trim and self.win_size is None:
-            print(colored("\n\nArgument Error: Provide valid Window size\n", "red"))
+            print(colored("\n\nArgument Error: Provide valid window size\n", "red"))
             # self.usage()
             # parser.print_help()
         if self.qual_format is None:
@@ -263,17 +282,20 @@ class FilterPair:
                                               "fastq variant...")
                 self.qual_format = self.detect_fastq_variant()
             else:
-                print(colored("\nError: Input File Can not found\n", "red"))
+                print(colored("\nError: Input file can not found\n", "red"))
                 # self.usage()
                 # parser.print_help()
-                sys.exit()
+                sys.exit(1)
             #   print "#################################################################"
-            if self.qual_format == 1:
-                print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.8+", "red"))
-            if self.qual_format == 2:
-                print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.3+", "red"))
-            if self.qual_format == 3:
-                print(colored("["+str(datetime.now())+"] The fastq quality format is Sanger", "red"))
+        if self.qual_format == 1:
+            print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.8+", "red"))
+        elif self.qual_format == 2:
+            print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.3+", "red"))
+        elif self.qual_format == 3:
+            print(colored("["+str(datetime.now())+"] The fastq quality format is Sanger", "red"))
+        else:
+            print(colored("\nError: Wrong quality format\n", "red"))
+            sys.exit(1)
             #   print "#################################################################\n\n"
 
         self.hash_qual_1 = self.get_hash(2, 43)
