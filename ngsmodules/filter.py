@@ -19,7 +19,7 @@ parser.add_argument('-c', '--qfmt', action='store', type=str, dest='qual_fmt', h
                                                                                     '[1= Illumina 1.8, 2= Illumina 1.3,'
                                                                                     '3= Sanger]. If quality format not '
                                                                                     'provided, it will automatically '
-                                                                                    'detected based on sequence data',
+                                                                                    'detect based on sequence data',
                     default='NULL')
 parser.add_argument('-e', '--nb', action='store', type=str, dest='n_cont', help='Filter the reads containing given %% of '
                                                                                 'uncalled bases (N)', default=101)

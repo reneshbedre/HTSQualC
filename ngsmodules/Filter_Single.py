@@ -16,6 +16,7 @@ import StatisticSingle
 import common_functions
 import subprocess
 
+
 class FilterSingle:
     hash_qual_1 = {}
     hash_qual_1a = {}
@@ -125,7 +126,7 @@ class FilterSingle:
                 self.file_1 = value
                 if os.path.exists(self.file_1):
                     if 'gz' in self.file_1:
-                        self.file_1_path = os.path.splitext(self.file_1)[0]
+                        self.file_1 = os.path.abspath(os.path.splitext(self.file_1)[0])
                         self.pathname = os.path.dirname(self.file_1)
                         self.pathname = os.path.abspath(self.pathname)
                         #   for gz uncompressed file
@@ -139,10 +140,10 @@ class FilterSingle:
                     print(colored("\nError : The given input file does not exist. Rerun the program by giving correct "
                                   "input file\n", "red"))
                     # self.usage()
-                    parser.print_help()
+                    # parser.print_help()
                     sys.exit(1)
             elif opt in ("-c", "--qfmt"):
-                self.qual_format = value
+                self.qual_format = int(value)
                 if self.qual_format == 'NULL':
                     self.qual_format = None
             elif opt in ("-d", "--msz"):
@@ -224,14 +225,29 @@ class FilterSingle:
             else:
                 print(colored("Error: Input File Can not found", "red"))
                 # self.usage()
-                parser.print_help()
                 sys.exit()
-            if self.qual_format == 1:
-                print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.8+", "red"))
-            if self.qual_format == 2:
-                print(colored("["+str(datetime.now())+"] The fastq quality format is illumina 1.3+", "red"))
-            if self.qual_format == 3:
-                print(colored("["+str(datetime.now())+"] The fastq quality format is Sanger", "red"))
+
+        if self.qual_format == 1:
+            print(colored("[" + str(datetime.now()) + "] The fastq quality format is illumina 1.8+", "red"))
+            qfmt_verify = self.detect_fastq_variant()
+            if qfmt_verify != self.qual_format:
+                print(colored("\nError: Wrong quality format\n", "red"))
+                sys.exit(1)
+        elif self.qual_format == 2:
+            print(colored("[" + str(datetime.now()) + "] The fastq quality format is illumina 1.3+", "red"))
+            qfmt_verify = self.detect_fastq_variant()
+            if qfmt_verify != self.qual_format:
+                print(colored("\nError: Wrong quality format\n", "red"))
+                sys.exit(1)
+        elif self.qual_format == 3:
+            print(colored("[" + str(datetime.now()) + "] The fastq quality format is Sanger", "red"))
+            qfmt_verify = self.detect_fastq_variant()
+            if qfmt_verify != self.qual_format:
+                print(colored("\nError: Wrong quality format\n", "red"))
+                sys.exit(1)
+        else:
+            print(colored("\nError: Wrong quality format\n", "red"))
+            sys.exit(1)
 
         self.hash_qual_1 = self.get_hash(2, 43)
         self.hash_qual_1a = self.get_hash(2, 43)
