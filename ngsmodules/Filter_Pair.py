@@ -737,13 +737,13 @@ class FilterPair:
         out_file_1_l = open(self.pathname+'/'+'raw_out_1'+'/'+out_file_1_l, 'a')
         out_file_2_l = open(self.pathname+'/'+'raw_out_2'+'/'+out_file_2_l, 'a')
         if out_file_1_l and out_file_2_l and read_seq_1_l and read_seq_2_l and len(read_seq_1_l) > int(self.min_len) and \
-                        len(read_seq_2_l) > int(self.min_len):
+                        len(read_seq_2_l) > int(self.min_len) and self.out_fmt == 'fastq':
             self.count_read_a += 1
             out_file_1_l.write(header_1_1_l+'\n'+read_seq_1_l+'\n'+header_2_1_l+'\n'+read_qual_1_l+'\n')
             out_file_2_l.write(header_1_2_l+'\n'+read_seq_2_l+'\n'+header_2_2_l+'\n'+read_qual_2_l+'\n')
             self.output_filter_data_sub(read_seq_1_l, read_qual_1_l, read_seq_2_l, read_qual_2_l)
-        elif out_file_1_l and out_file_2_l and read_seq_1_l and read_seq_2_l and len(read_seq_1_l) > self.min_len and \
-                        len(read_seq_2_l) > self.min_len and self.out_fmt == 'fasta':
+        elif out_file_1_l and out_file_2_l and read_seq_1_l and read_seq_2_l and len(read_seq_1_l) > int(self.min_len) and \
+                        len(read_seq_2_l) > int(self.min_len) and self.out_fmt == 'fasta':
             self.count_read_a += 1
             out_file_1_l.write('>'+header_1_1_l+'\n'+read_seq_1_l+'\n')
             out_file_1_l.write('>'+header_1_2_l+'\n'+read_seq_2_l+'\n')
