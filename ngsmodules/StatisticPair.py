@@ -310,7 +310,7 @@ class StatisticPair:
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Mean size (bp) of unfiltered reads", float(self.TotLenSum1/self.RawReadCount), float(self.TotLenSum2/self.RawReadCount)))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Average Quality value for unfiltered reads", float(self.TotQual1Sum/TotBasesWithN1), float(self.TotQual2Sum/TotBasesWithN2)))
 
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Average Quality value for filtered reads", float(self.TotQual1aSum/  TotBasesWithN1a), float(self.TotQual2aSum/TotBasesWithN2a)))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Average Quality value for filtered reads", float(self.TotQual1aSum/TotBasesWithN1a), float(self.TotQual2aSum/TotBasesWithN2a)))
         if MinSize:
             StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total number of reads below minimum size", self.ShortReadCount1, self.ShortReadCount2))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total unfiltered reads containing at least one uncalled base(N)", self.NcontReads1, self.NcontReads2))
