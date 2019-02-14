@@ -206,6 +206,9 @@ class FilterPair:
                 self.out_file_2 = value
             elif opt in ("-m", "--ofmt"):
                 self.out_fmt = value
+                if self.Trim not in ['fastq', 'fasta']:
+                    print(colored('Error: Unknown output file format parameter [fastq|fasta]\n', "red"))
+                    sys.exit(1)
             elif opt in ('-n', "--trim"):
                 self.Trim = value
                 if self.Trim not in ['True', 'False']:
