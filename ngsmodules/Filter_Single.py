@@ -115,8 +115,7 @@ class FilterSingle:
         except getopt.GetoptError:
             print(colored("\nError: wrong input parameter. check command\n", "red"))
             # self.usage()
-            parser.print_help()
-            sys.exit()
+            sys.exit(1)
 
         for opt, value in option:
             if opt in ('-h', "--help"):
@@ -157,11 +156,17 @@ class FilterSingle:
                     self.adapter = None
             elif opt in ("-g", "--per"):
                 self.Per = float(value)
+                if self.Per > 1 or self.Per < 0:
+                    print(colored('Error: Percent threshold (-g, --per) must be between 0-1\n', "red"))
+                    sys.exit(1)
             elif opt in ("-i", "--qthr"):
                 self.qual_thresh = int(value)
             elif opt in ('-n', "--trim"):
                 self.Trim = value
-                if self.Trim == 'False':
+                if self.Trim not in ['True', 'False']:
+                    print(colored('Error: Unknown trim parameter\n', "red"))
+                    sys.exit(1)
+                elif self.Trim == 'False':
                     self.Trim = None
             elif opt in ("-j", "--mqual"):
                 self.min_qual = value
@@ -169,11 +174,13 @@ class FilterSingle:
                 self.out_file_1 = value
             elif opt in ("-m", "--ofmt"):
                 self.out_fmt = value
+                if self.out_fmt not in ['fastq', 'fasta']:
+                    print(colored('Error: Unknown output file format parameter [fastq|fasta]\n', "red"))
+                    sys.exit(1)
             elif opt in ("-p", "--wsz"):
                 self.win_size = int(value)
             elif opt in ("-q", "--cpu"):
                 self.CPU = value
-                print(self.CPU, "y")
             elif opt in ("-r", "--mlk"):
                 self.min_len = value
             elif opt in ("-r", "--mlk"):
@@ -215,8 +222,8 @@ class FilterSingle:
             self.file_1 = self.file_1_path
         if self.Trim and self.win_size is None:
             print(colored("\nArgument Error: Provide valid Window size\n", "red"))
+            sys.exit(1)
             # self.usage()
-            parser.print_help()
         if self.qual_format is None:
             if self.file_1 and os.path.isfile(self.file_1):
                 print("["+str(datetime.now())+"] The fastq quality format is not provided therefore detecting the " \
@@ -274,7 +281,6 @@ class FilterSingle:
             self.raw_out_dir1 = self.pathname+'/'+'raw_out_1'
         else:
             # output_dir = self.pathname+'/'+'filtering_out'
-            print(self.file_1)
             output_dir = self.pathname + '/' + os.path.splitext(os.path.basename(self.file_1))[0] + '_filtering_out'
             # self.file_1_path
             raw_dir1 = self.pathname+'/'+'raw1'
@@ -335,7 +341,13 @@ class FilterSingle:
         os.chdir(output_dir)
         all_file_s_out = glob.glob(self.raw_out_dir1+'/*')
         all_file_s_out = sorted(all_file_s_out)
-        filter_out = open(file_s_basename+'_Clean.fastq', 'w')
+        if self.out_fmt == "fastq":
+            filter_out = open(file_s_basename+'_Clean.fastq', 'w')
+        elif self.out_fmt == "fasta":
+            filter_out = open(file_s_basename + '_Clean.fasta', 'w')
+        else:
+            print(colored('Error: Unknown output file format parameter [fastq|fasta]\n', "red"))
+            sys.exit(1)
 
         for f in all_file_s_out:
             if not f.endswith('.txt'):
@@ -564,13 +576,14 @@ class FilterSingle:
         self.raw_out_dir1 = self.pathname+'/'+'raw_out_1'
         os.chdir(self.raw_out_dir1)
         out_file_l = open(out_file_l, 'a')
-        if out_file_l and read_seq_l and len(read_seq_l) >= int(self.min_len):
+        if out_file_l and read_seq_l and len(read_seq_l) >= int(self.min_len) and self.out_fmt == 'fastq':
             self.count_read_a += 1
             out_file_l.write(header_1_l+'\n'+read_seq_l+'\n'+header_2_l+'\n'+read_qual_l+'\n')
             self.output_filter_data_sub(read_seq_l, read_qual_l)
         elif out_file_l and read_seq_l and len(read_seq_l) > self.min_len and self.out_fmt == 'fasta':
             self.count_read_a += 1
             out_file_l.write('>'+header_1_l+'\n'+read_seq_l+'\n')
+            self.output_filter_data_sub(read_seq_l, read_qual_l)
 
     def output_filter_data_sub(self, read_seq_l, read_qual_l):
         self.tot_Aa_1 += read_seq_l.count('A')
