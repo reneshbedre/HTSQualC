@@ -193,6 +193,9 @@ class FilterPair:
                     self.Adapter = None
             elif opt in ("-g", "--per"):
                 self.per = float(value)
+                if self.per > 1 or self.per < 0:
+                    print(colored('Error: Percent threshold (-g, --per) must be between 0-1\n', "red"))
+                    sys.exit(1)
             elif opt in ("-i", "--qthr"):
                 self.qual_thresh = int(value)
             elif opt in ("-j", "--mqual"):
