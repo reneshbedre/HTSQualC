@@ -54,7 +54,7 @@ parser.add_argument('-q', '--cpu', action='store', type=int, dest='cpu', help='N
 parser.add_argument('-m', '--ofmt', action='store', type=str, dest='out_fmt', help='Output file format (fastq/fasta) '
                                                                                '[default:fastq]', default='fastq')
 parser.add_argument('-v', '--no-vis', action='store', type=str, dest='vis_opt', help='No figures will be produced '
-                                                                                        '[yes|no] [default:no]',
+                                                                                        '[True|False] [default:False]',
                     default='NULL')
 parser.add_argument('--version', action='version', version='%(prog)s 1.0')
 
