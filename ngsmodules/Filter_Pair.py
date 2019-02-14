@@ -205,7 +205,10 @@ class FilterPair:
                 self.out_fmt = value
             elif opt in ('-n', "--trim"):
                 self.Trim = value
-                if self.Trim == 'False':
+                if self.Trim not in ['True', 'False']:
+                    print(colored('Error: Unknown trim parameter\n', "red"))
+                    sys.exit(1)
+                elif self.Trim == 'False':
                     self.Trim = None
             elif opt in ("-p", "--wsz"):
                 self.win_size = int(value)
@@ -275,7 +278,7 @@ class FilterPair:
         if self.Trim and self.win_size is None:
             print(colored("\n\nArgument Error: Provide valid window size\n", "red"))
             # self.usage()
-            # parser.print_help()
+            sys.exit(1)
         if self.qual_format is None:
             if self.file_p1 and self.file_p2 and os.path.isfile(self.file_p1) and os.path.isfile(self.file_p2):
                 print("["+str(datetime.now())+"] The fastq quality format is not provided therefore detecting the " \
