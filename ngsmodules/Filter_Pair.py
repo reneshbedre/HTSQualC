@@ -229,7 +229,7 @@ class FilterPair:
             elif opt in ("-v", "--no-vis"):
                 self.no_vis = value
                 if self.no_vis not in ['True', 'False']:
-                    print(colored('Error: Unknown no visualization parameter\n', "red"))
+                    print(colored('Error: Unknown visualization parameter [True|False]\n', "red"))
                     sys.exit(1)
                 elif self.no_vis == 'False':
                     self.no_vis = None
