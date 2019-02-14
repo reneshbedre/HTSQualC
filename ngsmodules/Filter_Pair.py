@@ -747,6 +747,7 @@ class FilterPair:
             self.count_read_a += 1
             out_file_1_l.write('>'+header_1_1_l+'\n'+read_seq_1_l+'\n')
             out_file_1_l.write('>'+header_1_2_l+'\n'+read_seq_2_l+'\n')
+            self.output_filter_data_sub(read_seq_1_l, read_qual_1_l, read_seq_2_l, read_qual_2_l)
 
     def output_filter_data_sub(self, read_seq_1_l, read_qual_1_l, read_seq_2_l, read_qual_2_l):
         self.tot_Aa_1 += read_seq_1_l.count('A')
