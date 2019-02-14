@@ -430,8 +430,15 @@ class FilterPair:
         all_files_out_2 = glob.glob(self.raw_out_dir_2+'/*')
         all_files_out_1 = sorted(all_files_out_1)
         all_files_out_2 = sorted(all_files_out_2)
-        filter_out_1  = open(file_p1_basename+'_Clean.fastq', 'w')
-        filter_out_2  = open(file_p2_basename+'_Clean.fastq', 'w')
+        if self.out_fmt == "fastq":
+            filter_out_1 = open(file_p1_basename+'_Clean.fastq', 'w')
+            filter_out_2 = open(file_p2_basename+'_Clean.fastq', 'w')
+        elif self.out_fmt == "fasta":
+            filter_out_1 = open(file_p1_basename + '_Clean.fasta', 'w')
+            filter_out_2 = open(file_p2_basename + '_Clean.fasta', 'w')
+        else:
+            print(colored('Error: Unknown output file format parameter [fastq|fasta]\n', "red"))
+            sys.exit(1)
         self.merge_files(all_files_out_1, filter_out_1)
         self.merge_files(all_files_out_2, filter_out_2)
         shutil.rmtree(raw_dir_1)
