@@ -277,9 +277,9 @@ class StatisticSingle:
             StatFile.write("%-65s\t%-20s\n" % ("Reads filtered out for quality", self.FailQualCount1))
         if Adapter:
             StatFile.write("%-65s\t%-20s\n" % ("Reads trimmed for adapter", self.AdtrimCount1))
-        StatFile.write("%-65s\t%.2f\n" % ("Total %GC content in unfiltered reads",
+        StatFile.write("%-65s\t%.2f\n" % ("Average %GC content in unfiltered reads",
                                           float((self.TotGCSum1*100)/self.TotLenSum1)))
-        StatFile.write("%-65s\t%.2f\n" % ("Total %GC content in filtered reads",
+        StatFile.write("%-65s\t%.2f\n" % ("Average %GC content in filtered reads",
                                           float((self.TotGCSuma1*100)/self.TotLenSuma1)))
         if Trim:
             StatFile.write("%-65s\t%-20s\n" % ("Reads trimmed for quality", self.TrimQualCt))
@@ -320,6 +320,7 @@ class StatisticSingle:
         plt.xticks([10, 20, 30, 40, 50, 60, 70, 80, 90, 100], rotation='horizontal')
         plt.legend(["Filtered", "Unfiltered"], loc=2)
         plt.ylabel("# Reads", fontweight='bold')
+        plt.xlabel("%GC Content", fontweight='bold')
         plt.savefig(FileS_basname+'_GCdist.png')
         plt.clf()
 

@@ -321,8 +321,8 @@ class StatisticPair:
             StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Reads filtered out for quality", self.FailQualCount1, self.FailQualCount2))
         if Adapter:
             StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Reads trimmed for adapter", self.AdtrimCount1, self.AdtrimCount2))
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total %GC content in unfiltered reads", float((self.TotGCSum1*100)/self.TotLenSum1), float((self.TotGCSum2*100)/self.TotLenSum2)))
-        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total %GC content in filtered reads", float((self.TotGCSuma1*100)/self.TotLenSuma1), float((self.TotGCSuma2*100)/self.TotLenSuma2)))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Average %GC content in unfiltered reads", float((self.TotGCSum1*100)/self.TotLenSum1), float((self.TotGCSum2*100)/self.TotLenSum2)))
+        StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Average %GC content in filtered reads", float((self.TotGCSuma1*100)/self.TotLenSuma1), float((self.TotGCSuma2*100)/self.TotLenSuma2)))
         if Trim:
             StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Reads trimmed for quality", self.TrimQualCt1, self.TrimQualCt2))
         StatFile.write("%-65s\t%-20s\t%-20s\n" % ("Total unfiltered reads with >Q30 mean quality value", Q301, Q302))
@@ -367,6 +367,7 @@ class StatisticPair:
         plt.xticks([10, 20, 30, 40, 50, 60, 70, 80, 90, 100], rotation='horizontal')
         plt.legend(["Filtered", "Unfiltered"], loc=2)
         plt.ylabel("# Reads", fontweight='bold')
+        plt.xlabel("%GC Content", fontweight='bold')
         plt.savefig(FileP1_basname+'_GCdist.png')
         plt.clf()
 
