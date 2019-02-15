@@ -84,7 +84,7 @@ class FilterSingle:
     file_1_path = None
     #   for uncompressed gz file
     file_1_path_gz = None
-    no_vis = None
+    no_vis = False
 
     def __init__(self):
         try:

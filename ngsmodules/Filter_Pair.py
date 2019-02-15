@@ -122,7 +122,7 @@ class FilterPair:
     out_folder = None
     _gzip_1 = False
     _gzip_2 = False
-    no_vis = None
+    no_vis = False
 
     def __init__(self):
         self.min_size = 0
