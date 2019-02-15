@@ -20,7 +20,7 @@ parser.add_argument('-c', '--qfmt', action='store', type=str, dest='qual_fmt', h
                                                                                     '3= Sanger]. If quality format not '
                                                                                     'provided, it will automatically '
                                                                                     'detect based on sequence data',
-                    default='NULL')
+                    default=0)
 parser.add_argument('-e', '--nb', action='store', type=str, dest='n_cont', help='Filter the reads containing given %% of '
                                                                                 'uncalled bases (N)', default=101)
 parser.add_argument('-f', '--adp', action='store', type=str, dest='adpt_seqs', help='Trim the adapter and '

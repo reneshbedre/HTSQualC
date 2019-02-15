@@ -93,7 +93,7 @@ class FilterPair:
     min_len = 0
     out_file_1 = None
     out_fmt = 'fastq'
-    qual_format = None
+    qual_format = 0
     win_size = 5
     ad_trim_2 = 0
     trim_qual_ct2 = 0
@@ -180,7 +180,7 @@ class FilterPair:
                     self.file_2_path = self.pathname2
             elif opt in ("-c", "--qfmt"):
                 self.qual_format = int(value)
-                if self.qual_format == 'NULL':
+                if self.qual_format == 0:
                     self.qual_format = None
             elif opt in ("-d", "--msz"):
                 self.min_size = value

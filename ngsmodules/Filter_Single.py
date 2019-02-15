@@ -70,7 +70,7 @@ class FilterSingle:
     min_len = 0
     out_file_1 = None
     out_fmt = 'fastq'
-    qual_format = None
+    qual_format = 0
     win_size = 5
     ad_trim_2 = 0
     adapter_list = []
@@ -143,7 +143,7 @@ class FilterSingle:
                     sys.exit(1)
             elif opt in ("-c", "--qfmt"):
                 self.qual_format = int(value)
-                if self.qual_format == 'NULL':
+                if self.qual_format == 0:
                     self.qual_format = None
             elif opt in ("-d", "--msz"):
                 self.min_size = value
