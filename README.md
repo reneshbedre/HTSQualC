@@ -8,6 +8,7 @@ RseqFilt is an automated sequence filtering analysis tool for a single and paire
 - Parallel computation for accelerating the speed of analysis
 - Visualization and statistics
 - Docker image is available
+- Available on CyVerse Discovery Environment (DE)
 - No dependency on an external open-source tool
 
 ## Getting Started
