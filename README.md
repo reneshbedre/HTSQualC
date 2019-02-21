@@ -48,17 +48,17 @@ filter.py -h
 Filter single-end reads
 
 ```
-# for single file
+# for single sample
 filter.py OPTIONS -a fastq_file
-# for multiples files
+# for multiples samples
 filter.py OPTIONS -a fastq_file_1,fastq_file_2
 ```
 
 Filter paired-end reads
 ```
-# for single file
+# for single sample
 filter.py OPTIONS -a fastq_file_left -b fastq_file_right
-# for multiples files
+# for multiples samples
 filter.py OPTIONS -a fastq_file_left_1,fastq_file_left_2 -b fastq_file_right_1,fastq_file_right_2
 ```
 
