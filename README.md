@@ -14,7 +14,7 @@ RseqFilt is an automated sequence filtering analysis tool for a single and paire
 ## Getting Started
 
 ### Prerequisites
-You need Python3 to install and run RSeqFilt. Following Python3 packages need to install before running the tool. If you have not installed these packages, RseqFilt will guide you to install them.
+You need Python3 (3.0* to 3.6*) to install and run RSeqFilt. Following Python3 packages need to install before running the tool. If you have not installed these packages, RseqFilt will guide you to install them.
 
 ```
 numpy
