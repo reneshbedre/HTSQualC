@@ -448,6 +448,7 @@ class StatisticPair:
         plt.xticks([0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42], rotation='vertical')
         plt.legend(["Filtered", "Unfiltered"], loc=2)
         plt.ylabel("# Reads", fontweight='bold')
+        plt.xlabel("Phred quality score", fontweight='bold')
         plt.savefig(FileP1_basname+'_Qualdist.png', format='png', bbox_inches='tight', dpi=300)
         plt.clf()
 
@@ -456,6 +457,7 @@ class StatisticPair:
         plt.xticks([0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42], rotation='vertical')
         plt.legend(["Filtered", "Unfiltered"], loc=2)
         plt.ylabel("# Reads", fontweight='bold')
+        plt.xlabel("Phred quality score", fontweight='bold')
         plt.savefig(FileP2_basname+'_Qualdist.png', format='png', bbox_inches='tight', dpi=300)
         plt.clf()
 

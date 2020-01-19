@@ -321,7 +321,7 @@ class StatisticSingle:
         plt.legend(["Filtered", "Unfiltered"], loc=2)
         plt.ylabel("# Reads", fontweight='bold')
         plt.xlabel("%GC Content", fontweight='bold')
-        plt.savefig(FileS_basname+'_GCdist.png')
+        plt.savefig(FileS_basname+'_GCdist.png', format='png', bbox_inches='tight', dpi=300)
         plt.clf()
 
         # for base composition
@@ -342,7 +342,7 @@ class StatisticSingle:
         plt.legend(bbox_to_anchor=(0., 1., 1., .102), loc=3, prop={'size':15}, ncol=2, mode="expand")
         #space in x axis
         plt.margins(0.05, None)
-        plt.savefig(FileS_basname+'_Basedist.png')
+        plt.savefig(FileS_basname+'_Basedist.png', format='png', bbox_inches='tight', dpi=300)
         plt.clf()
 
 #       #for quality
@@ -372,7 +372,8 @@ class StatisticSingle:
         plt.xticks([0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42], rotation='vertical')
         plt.legend(["Filtered", "Unfiltered"], loc=2)
         plt.ylabel("# Reads", fontweight='bold')
-        plt.savefig(FileS_basname+'_Qualdist.png')
+        plt.xlabel("Phred quality score", fontweight='bold')
+        plt.savefig(FileS_basname+'_Qualdist.png', format='png', bbox_inches='tight', dpi=300)
         plt.clf()
 
         #pie chart for base composition
@@ -392,6 +393,6 @@ class StatisticSingle:
         plt.axis("equal")
         plt.pie(x_list, labels=label_list, autopct="%1.1f%%")
         plt.title("Quality Score Distribution")
-        plt.savefig(FileS_basname+'_QualGroup.png')
+        plt.savefig(FileS_basname+'_QualGroup.png', format='png', bbox_inches='tight', dpi=300)
         plt.clf()
 
