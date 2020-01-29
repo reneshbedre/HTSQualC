@@ -1,4 +1,4 @@
-# Dockerfile for RseqFilt container
+# Dockerfile for HTSeqQC container
 # load ubuntu 18.04
 FROM ubuntu:18.04
 
@@ -27,9 +27,9 @@ ENV PROJDIR /project
 RUN mkdir -p $PROJDIR
 WORKDIR $PROJDIR
 
-# clone and install RseqFilt
-RUN git clone https://github.com/reneshbedre/RseqFilt.git
-WORKDIR $PROJDIR/RseqFilt
+# clone and install HTSeqQC
+RUN git clone https://github.com/reneshbedre/HTSeqQC.git
+WORKDIR $PROJDIR/HTSeqQC
 RUN python3 setup.py install
 
 # execute filter.py command when container runs

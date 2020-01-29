@@ -34,7 +34,7 @@ datetime
 Clone or download HTSeqQC using following command,
 
 ```
-git clone https://github.com/reneshbedre/RseqFilt.git
+git clone https://github.com/reneshbedre/HTSeqQC.git
 ```
 
 To install HTSeqQC, run following command in the root folder,
@@ -127,6 +127,33 @@ filter.py OPTIONS -a fastq_file_left -b fastq_file_right
 filter.py OPTIONS -a fastq_file_left_1,fastq_file_left_2 -b fastq_file_right_1,fastq_file_right_2
 ```
 
+### Output
+HTSeqQC produces the filtered cleaned HTS data as FASTQ/FASTA files, 
+and statistics and visualization of filtered cleaned HTS datasets. The
+output will be saved in folder with name ending as filtering_out.
+
 ### License
 
 This project is available under the MIT License. See complete details in [LICENSE](LICENSE) file.
+
+### HTSeqQC Analysis commands used for case study in paper
+
+*download the test paired and single end data using NCBI SRA toolkit*
+fastq-dump --split-files SRR2165176
+fastq-dump --split-files SRR2165177
+fastq-dump --split-files SRR2165178
+fastq-dump  SRR1805340
+
+*Run HTSeqQC as a command line tool (Linux and Mac)*
+- for paired end data with default parameter (setting 1)
+`filter.py --cpu 18 --p1 SRR2165176_1.fastq --p2 SRR2165176_2.fastq`
+
+- for paired end data with quality threshold, adapter sequences, and 
+  uncalled based parameters (setting 2)
+`filter.py --cpu 18 --qthr 25 --nb 5 --adp AGATCGGAAGAGCACACGTCTGAACTCCAGTCA,AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT --p1 SRR2165176_1.fastq --p2 SRR2165176_2.fastq` 
+
+- for paired end data with default parameter and multiple samples (setting 3)
+`filter.py --cpu 18 --p1 SRR2165176_1.fastq,SRR2165177_1.fastq,SRR2165178_1.fastq --p2 SRR2165176_2.fastq,SRR2165177_2.fastq,SRR2165178_2.fastq`
+
+- for single end data with default parameter (setting 4)
+`filter.py --cpu 18 --p1 SRR1805340.fastq`

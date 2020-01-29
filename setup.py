@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
 '''
-RseqFilt is an automated sequence filtering analysis tool for a single and paired-end high throughput RNA-seq data generated from Illumina sequencing platforms.
-'''
+HTSeqQC is an automated quality control analysis tool for a single and
+paired-end high-throughput sequencing data (HTS) generated from Illumina
+sequencing platforms.'''
 
 import sys
 from setuptools import Extension, setup
@@ -127,12 +128,12 @@ except ImportError:
 
 
 setup(
-    name='filter',
-    url='',
+    name='HTSeqQC',
+    url='https://github.com/reneshbedre/HTSeqQC.git',
     license='MIT',
     author='Renesh Bedre',
     author_email='reneshbe@gmail.com',
-    description='RseqFilt: Quality filtering analysis for RNA-seq data',
+    description='HTSeqQC: Quality control analysis of single and paired-end sequence data',
     classifiers=[
         'Intended Audience :: Developers'
         'Intended Audience :: Education',
