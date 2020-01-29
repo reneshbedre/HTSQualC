@@ -4,7 +4,7 @@ import subprocess
 import sys
 from termcolor import colored
 
-parser = argparse.ArgumentParser(description="Quality filtering analysis of single and paired-end sequence data")
+parser = argparse.ArgumentParser(description="Quality control analysis of single and paired-end sequence data")
 
 parser.add_argument('-a', '--p1', action='store', type=str, dest='input_files_1', help='Single end input files or left '
                                                                                        'files for paired-end data '
