@@ -136,7 +136,7 @@ output will be saved in folder with name ending as filtering_out.
 
 This project is available under the MIT License. See complete details in [LICENSE](LICENSE) file.
 
-### HTSeqQC Analysis commands used for case study in paper
+### HTSeqQC Analysis commands used for test datasets
 
 **Download the test paired and single end data using NCBI SRA toolkit**
 ```
