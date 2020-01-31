@@ -138,11 +138,13 @@ This project is available under the MIT License. See complete details in [LICENS
 
 ### HTSeqQC Analysis commands used for case study in paper
 
-*download the test paired and single end data using NCBI SRA toolkit*
+**Download the test paired and single end data using NCBI SRA toolkit**
+```
 fastq-dump --split-files SRR2165176
 fastq-dump --split-files SRR2165177
 fastq-dump --split-files SRR2165178
 fastq-dump  SRR1805340
+```
 
 *Run HTSeqQC as a command line tool (Linux and Mac)*
 - for paired end data with default parameter (setting 1)
