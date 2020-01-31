@@ -148,14 +148,18 @@ fastq-dump  SRR1805340
 
 *Run HTSeqQC as a command line tool (Linux and Mac)*
 - for paired end data with default parameter (setting 1)
+
 `filter.py --cpu 18 --p1 SRR2165176_1.fastq --p2 SRR2165176_2.fastq`
 
 - for paired end data with quality threshold, adapter sequences, and 
   uncalled based parameters (setting 2)
+  
 `filter.py --cpu 18 --qthr 25 --nb 5 --adp AGATCGGAAGAGCACACGTCTGAACTCCAGTCA,AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT --p1 SRR2165176_1.fastq --p2 SRR2165176_2.fastq` 
 
 - for paired end data with default parameter and multiple samples (setting 3)
+
 `filter.py --cpu 18 --p1 SRR2165176_1.fastq,SRR2165177_1.fastq,SRR2165178_1.fastq --p2 SRR2165176_2.fastq,SRR2165177_2.fastq,SRR2165178_2.fastq`
 
 - for single end data with default parameter (setting 4)
+
 `filter.py --cpu 18 --p1 SRR1805340.fastq`
