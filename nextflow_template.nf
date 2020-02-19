@@ -1,16 +1,19 @@
 // input data directory path
-DATAP = "/scratch/user/ren_net/software/RseqFilt/test"
+DATAP = "/scratch/user/ren_net/software/HTSeqQC/test"
 // input file extension
 FileExtension="fastq"
-// for paired end files
+// Check paired end files (for single end files remove 2)
 allReads="${DATAP}/*_{1,2}.${FileExtension}"
-// for single end files
-//allReads="${DATAP}/*_{1}.${FileExtension}"
+// Output directory
+Outdir = "/scratch/user/ren_net/software/HTSeqQC/test"
+
+// System.out.println(allReads)
 
 log.info """\
-         RseqFilt Quality Filtering
+         HTSeqQC Quality Filtering
          =============================
          reads : ${DATAP}
+         outdir: ${Outdir}
          """
          .stripIndent()
 
@@ -18,19 +21,24 @@ log.info """\
 Channel
     .fromFilePairs(allReads)
     .ifEmpty { error "Cannot find any reads matching: ${DATAP}" }
-    .set { reads }
+    .set { read_pairs }
+
 
 
 // filter data
 process filterData {
     tag "$pair_id"
+    publishDir "Outdir"
 
     input:
-    set pair_id, file(reccads) from read_pairs
+    set pair_id, file(reads) from read_pairs
 
     script:
     """
     # you can change HTSeqQC parameter here
-    filter.py --cpu 18 --p1 ${reads[0]} --p2 ${reads[1]}
+    #filter.py --cpu 18 --p1 ${reads[0]} --p2 ${reads[1]}
+
+
     """
 }
+
