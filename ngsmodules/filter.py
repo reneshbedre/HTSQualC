@@ -72,7 +72,7 @@ if results.input_files_2 is None:
         print(colored("Error: input file is missing \n", "red"))
         sys.exit(1)
     # fastq_files = results.input_files_1.split(',')
-    results.input_files_1 = ','.join(results.p1)
+    results.input_files_1 = ','.join(results.input_files_1)
     fastq_files = re.split(',|\s+', results.input_files_1)
     for file in fastq_files:
         # print("Filtering reads:", file)
