@@ -9,11 +9,10 @@ parser = argparse.ArgumentParser(description="Quality control analysis of single
 
 parser.add_argument('-a', '--p1', action='store', type=str, dest='input_files_1', nargs='+',
                     help='Single end input files or left files for paired-end data (.fastq, .fq). Multiple sample '
-                         'files must be separated by comma', default=None)
-parser.add_argument('-b', '--p2', action='store', type=str, dest='input_files_2', help='Right files for paired-end data '
-                                                                                       '(.fastq, .fq). Multiple files '
-                                                                                       'must be separated by comma ',
-                    default=None)
+                         'files must be separated by comma or space', default=None)
+parser.add_argument('-b', '--p2', action='store', type=str, dest='input_files_2', nargs='+',
+                    help='Right files for paired-end data (.fastq, .fq). Multiple files must be separated by comma or '
+                         'space ', default=None)
 parser.add_argument('-c', '--qfmt', action='store', type=str, dest='qual_fmt', help='Quality value format '
                                                                                     '[1= Illumina 1.8, 2= Illumina 1.3,'
                                                                                     '3= Sanger]. If quality format not '
@@ -70,10 +69,10 @@ if results.input_files_2 is None:
         print(colored("Error: input file is missing \n", "red"))
         sys.exit(1)
     # fastq_files = results.input_files_1.split(',')
-    print(results.input_files_1)
-    results.input_files_1 = ','.join(results.input_files_1)
-    print(results.input_files_1)
-    fastq_files = re.split(',|\s+', results.input_files_1)
+    # this is specifically added for cyverse input widget
+    if type(results.input_files_1) is list:
+        results.input_files_1 = ','.join(results.input_files_1)
+    fastq_files = re.split(',', results.input_files_1)
     for file in fastq_files:
         # print("Filtering reads:", file)
         p1 = subprocess.Popen(["Filter_Single.py", "--p1", str(file), "--qfmt", str(results.qual_fmt),
@@ -94,8 +93,14 @@ else:
         sys.exit(1)
     # fastq_files_1 = results.input_files_1.split(',')
     # fastq_files_2 = results.input_files_2.split(',')
-    fastq_files_1 = re.split(',|\s+', results.input_files_1)
-    fastq_files_2 = re.split(',|\s+', results.input_files_2)
+    # this is specifically added for cyverse input widget
+    if type(results.input_files_1) is list:
+        results.input_files_1 = ','.join(results.input_files_1)
+    fastq_files_1 = re.split(',', results.input_files_1)
+    # this is specifically added for cyverse input widget
+    if type(results.input_files_2) is list:
+        results.input_files_2 = ','.join(results.input_files_2)
+    fastq_files_2 = re.split(',', results.input_files_2)
     if len(fastq_files_1) != len(fastq_files_2):
         print(colored("Error: filtering exited with error status\nunequal number of files\n", "red"))
         sys.exit(1)
