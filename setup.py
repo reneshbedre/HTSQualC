@@ -129,6 +129,7 @@ except ImportError:
 
 setup(
     name='HTSeqQC',
+    version=1.0,
     url='https://github.com/reneshbedre/HTSeqQC.git',
     license='MIT',
     author='Renesh Bedre',
