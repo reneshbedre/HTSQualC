@@ -3,7 +3,7 @@ DATAP = "/scratch/user/ren_net/software/HTSeqQC/test"
 // input file extension
 FileExtension="fastq"
 // Check paired end files (for single end files remove 2)
-// first should check the file name structure before using 
+// first should check the file name structure before using
 allReads="${DATAP}/*_{1,2}.${FileExtension}"
 // Output directory
 Outdir = "/scratch/user/ren_net/software/HTSeqQC/test"
