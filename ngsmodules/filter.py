@@ -3,6 +3,7 @@ import argparse
 import subprocess
 import sys
 from termcolor import colored
+import re
 
 parser = argparse.ArgumentParser(description="Quality control analysis of single and paired-end sequence data")
 
@@ -70,7 +71,8 @@ if results.input_files_2 is None:
     if results.input_files_1 is None:
         print(colored("Error: input file is missing \n", "red"))
         sys.exit(1)
-    fastq_files = results.input_files_1.split(',')
+    # fastq_files = results.input_files_1.split(',')
+    fastq_files = re.split(',|\s+', results.input_files_1)
     for file in fastq_files:
         # print("Filtering reads:", file)
         p1 = subprocess.Popen(["Filter_Single.py", "--p1", str(file), "--qfmt", str(results.qual_fmt),
@@ -89,8 +91,10 @@ else:
     if results.input_files_2 is None:
         print(colored("Error: right read input file is missing \n", "red"))
         sys.exit(1)
-    fastq_files_1 = results.input_files_1.split(',')
-    fastq_files_2 = results.input_files_2.split(',')
+    # fastq_files_1 = results.input_files_1.split(',')
+    # fastq_files_2 = results.input_files_2.split(',')
+    fastq_files_1 = re.split(',|\s+', results.input_files_1)
+    fastq_files_2 = re.split(',|\s+', results.input_files_2)
     if len(fastq_files_1) != len(fastq_files_2):
         print(colored("Error: filtering exited with error status\nunequal number of files\n", "red"))
         sys.exit(1)
