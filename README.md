@@ -65,10 +65,10 @@ optional arguments:
   -a INPUT_FILES_1, --p1 INPUT_FILES_1
                         Single end input files or left files for paired-end
                         data (.fastq, .fq). Multiple sample files must be
-                        separated by comma
+                        separated by comma or space
   -b INPUT_FILES_2, --p2 INPUT_FILES_2
                         Right files for paired-end data (.fastq, .fq).
-                        Multiple files must be separated by comma
+                        Multiple files must be separated by comma or space
   -c QUAL_FMT, --qfmt QUAL_FMT
                         Quality value format [1= Illumina 1.8, 2= Illumina
                         1.3,3= Sanger]. If quality format not provided, it
