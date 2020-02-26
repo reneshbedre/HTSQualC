@@ -440,7 +440,6 @@ class FilterSingle:
 #       out_file.close()
         f1.close()
 #       l.release()
-
         stat_file = open('StatTemp.txt', 'a')
         self.hash_gc_1 = collections.OrderedDict(sorted(self.hash_gc_1.items()))
         self.hash_gc_1_list = self.hash_gc_1.values()
@@ -583,7 +582,7 @@ class FilterSingle:
             self.count_read_a += 1
             out_file_l.write(header_1_l+'\n'+read_seq_l+'\n'+header_2_l+'\n'+read_qual_l+'\n')
             self.output_filter_data_sub(read_seq_l, read_qual_l)
-        elif out_file_l and read_seq_l and len(read_seq_l) > self.min_len and self.out_fmt == 'fasta':
+        elif out_file_l and read_seq_l and len(read_seq_l) > int(self.min_len) and self.out_fmt == 'fasta':
             self.count_read_a += 1
             out_file_l.write('>'+header_1_l+'\n'+read_seq_l+'\n')
             self.output_filter_data_sub(read_seq_l, read_qual_l)
