@@ -5,18 +5,15 @@ FileExtension="fastq"
 // Check paired end files (for single end files remove 2)
 // first should check the file name structure before using
 allReads="${DATAP}/*_{1,2}.${FileExtension}"
-// Output directory
-Outdir = "/scratch/user/ren_net/software/HTSeqQC/test"
 
-// System.out.println(allReads)
 
 log.info """\
          HTSeqQC Quality Filtering
          =============================
          reads : ${DATAP}
-         outdir: ${Outdir}
          """
          .stripIndent()
+
 
 // for paired end reads
 Channel
@@ -25,11 +22,9 @@ Channel
     .set { read_pairs }
 
 
-
 // filter data
 process filterData {
     tag "$pair_id"
-    publishDir "Outdir"
 
     input:
     set pair_id, file(reads) from read_pairs
