@@ -680,7 +680,10 @@ class FilterSingle:
     def file_parts(self, iterable, n):
         iterable = iter(iterable)
         while True:
-            yield chain([next(iterable)], islice(iterable, n-1))
+            try:
+                yield chain([next(iterable)], islice(iterable, n - 1))
+            except StopIteration:
+                return
 
     @staticmethod
     def usage():

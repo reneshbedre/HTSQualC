@@ -37,8 +37,7 @@ process filterData {
     script:
     """
     # you can change HTSeqQC parameter here
-    #filter.py --cpu 18 --p1 ${reads[0]} --p2 ${reads[1]}
-
+    filter.py --cpu 18 --p1 ${reads[0]} --p2 ${reads[1]}
 
     """
 }

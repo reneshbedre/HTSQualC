@@ -372,8 +372,8 @@ class FilterPair:
         print("["+str(datetime.now())+"]" + " Preparing the data for analysis...")
         #   file_p1 = open(self.pathname+'/'+os.path.basename(self.file_p1), 'rU')
         #   file_p2 = open(self.pathname+'/'+os.path.basename(self.file_p2), 'rU')
-        file_p1 = open(self.file_1_path+'/'+os.path.basename(self.file_p1), 'rU')
-        file_p2 = open(self.file_1_path+'/'+os.path.basename(self.file_p2), 'rU')
+        file_p1 = open(self.file_1_path+'/'+os.path.basename(self.file_p1), 'r')
+        file_p2 = open(self.file_1_path+'/'+os.path.basename(self.file_p2), 'r')
         file_p1_basename = os.path.splitext(os.path.basename(self.file_p1))[0]
         file_p2_basename = os.path.splitext(os.path.basename(self.file_p2))[0]
         line_count_1 = sum(1 for line in file_p1)
@@ -465,8 +465,8 @@ class FilterPair:
     def filter_data(self, fastq_file_1, fastq_file_2, i):
         max_read_len_1 = 0; min_read_len_1 = 1000000
         max_read_len_2 = 0; min_read_len_2 = 1000000
-        f1 = open(fastq_file_1, 'rU')
-        f2 = open(fastq_file_2, 'rU')
+        f1 = open(fastq_file_1, 'r')
+        f2 = open(fastq_file_2, 'r')
 #       l.acquire()
         out_file_1 = str(i)
         out_file_2 = str(i)
@@ -836,7 +836,7 @@ class FilterPair:
     def detect_fastq_variant(self):
         Count = 0
         check = []
-        File = open(self.file_p1, 'rU')
+        File = open(self.file_p1, 'r')
         for line in File:
             id =line.rstrip()
             if not id.startswith('@'):
@@ -865,7 +865,6 @@ class FilterPair:
             return 3
 
     def split_file(self, File, num_lines, Dir):
-        #   File = self.pathname+'/'+os.path.basename(File)
         File = self.file_1_path+'/'+os.path.basename(File)
         os.chdir(Dir)
         with open(File) as MainFile:
@@ -873,6 +872,7 @@ class FilterPair:
                 file_split = '{}'.format(i)
                 with open(file_split, 'w') as f:
                     f.writelines(lines)
+
     
     @staticmethod
     def find_len(seq, max_read_len_1_l, min_read_len_1_l):
@@ -893,7 +893,10 @@ class FilterPair:
     def file_parts(iterable, n):
         iterable = iter(iterable)
         while True:
-            yield chain([next(iterable)], islice(iterable, n-1))
+            try:
+                yield chain([next(iterable)], islice(iterable, n-1))
+            except StopIteration:
+                return
 
     @staticmethod
     def usage():

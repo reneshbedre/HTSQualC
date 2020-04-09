@@ -17,7 +17,7 @@ sequencing platforms.
 ## Getting Started
 
 ### Prerequisites
-You need Python 3 to install and run HTSeqQC. Following Python 3 
+You need Python 3 (tested on 3.6 and 3.7) to install and run HTSeqQC. Following Python 3 
 packages need to install before running the HTSeqQC. If you have not .
 installed these packages, HTSeqQC will guide you to install them.
 
