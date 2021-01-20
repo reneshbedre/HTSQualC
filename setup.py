@@ -152,7 +152,7 @@ setup(
              'ngsmodules/StatisticPair.py',
              'ngsmodules/common_functions.py',
              ],
-    requires=['numpy', 'python (3.6 and 3.7)', 'itertools', 'csv', 'matplotlib', 'datetime', 'multiprocessing', 'math',
+    requires=['numpy', 'python', 'itertools', 'csv', 'matplotlib', 'datetime', 'multiprocessing', 'math',
               'collections', 'glob', 'shutil', 'pysam', 'subprocess', 'termcolor'],
 
 
