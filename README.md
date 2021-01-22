@@ -43,6 +43,12 @@ To install HTSeqQC, run following command in the root folder,
 python setup.py install
 ```
 
+Install using conda,
+
+```
+conda install -c bioconda htseqqc
+```
+
 ### How to use
 
 Print help message to see all required and optional parameters,
