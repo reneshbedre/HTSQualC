@@ -54,6 +54,10 @@ parser.add_argument('-m', '--ofmt', action='store', type=str, dest='out_fmt', he
 parser.add_argument('-v', '--no-vis', action='store', type=str, dest='vis_opt', help='No figures will be produced '
                                                                                         '[True|False] [default:False]',
                     default='False')
+parser.add_argument('-z', '--compress', action='store', type=str, dest='compress', help='Compress (.gz) the filtered '
+                                                                                        'FASTQ output [True|False] '
+                                                                                        '[default:False]',
+                    default='False')
 parser.add_argument('--version', action='version', version='%(prog)s 1.0')
 
 # print help message if no arguments provided
@@ -81,7 +85,7 @@ if results.input_files_2 is None:
                                "--qthr", str(results.qual_thresh), "--trim", results.trim_opt,
                                "--wsz", str(results.wind_size), "--mlk", str(results.min_len_filt),
                                "--cpu", str(results.cpu), "--ofmt", str(results.out_fmt),
-                               "--no-vis", str(results.vis_opt)])
+                               "--no-vis", str(results.vis_opt), "--compress", str(results.compress)])
 
         p1.wait()
         if p1.returncode != 0:
@@ -112,7 +116,7 @@ else:
                                "--qthr", str(results.qual_thresh), "--trim", results.trim_opt,
                                "--wsz", str(results.wind_size), "--mlk", str(results.min_len_filt),
                                "--cpu", str(results.cpu), "--ofmt", str(results.out_fmt),
-                               "--no-vis", str(results.vis_opt)])
+                               "--no-vis", str(results.vis_opt), "--compress", str(results.compress)])
         p1.wait()
         if p1.returncode != 0:
             print(colored("Error: filtering exited with error status\n", "red"))
