@@ -92,7 +92,7 @@ class FilterSingle:
                 # self.usage()
                 parser.print_help()
                 sys.exit(1)
-            option, args = getopt.getopt(sys.argv[1:], "ha:b:c:d:e:f:g:i:j:k:l:m:n:p:q:r:s:t:u:v:", ["p1=",
+            option, args = getopt.getopt(sys.argv[1:], "ha:b:c:d:e:f:g:i:j:k:l:m:n:p:q:r:s:t:u:v:z:", ["p1=",
                                                                                                      "p2=",
                                                                                                      "qfmt=",
                                                                                                      "msz=",
@@ -111,7 +111,8 @@ class FilterSingle:
                                                                                                      "pipeline_flag=",
                                                                                                      "out=",
                                                                                                      "order=",
-                                                                                                     "no-vis="])
+                                                                                                     "no-vis=",
+                                                                                                     "compress="  ])
         except getopt.GetoptError:
             print(colored("\nError: wrong input parameter. check command\n", "red"))
             # self.usage()
@@ -198,6 +199,13 @@ class FilterSingle:
                     sys.exit(1)
                 elif self.no_vis == 'False':
                     self.no_vis = None
+            elif opt in ("-z", "--compress"):
+                self.compress = value
+                if self.compress not in ['True', 'False']:
+                    print(colored('Error: Unknown output compress parameter [True|False]\n', "red"))
+                    sys.exit(1)
+                elif self.compress == 'False':
+                    self.compress = None
             elif opt in ("-b", "--p2"):
                 print(colored("Error: use -filter-p option for paired-end data", "red"))
                 sys.exit(1)
@@ -213,15 +221,6 @@ class FilterSingle:
             if p1.returncode != 0:
                 print(colored("Error: during uncompress file", "red"))
                 sys.exit(1)
-            #   read_file = gzip.GzipFile(self.file_1, 'rb')
-            #   temp = read_file.read()
-            #   read_file.close()
-            #   out_file = file(os.path.splitext(os.path.basename(self.file_1))[0], 'wb')
-            #   out_file = file(self.file_1_path_gz, 'wb')
-            #   out_file.write(temp)
-            #   out_file.close()
-            #   self.file_1 = os.path.splitext(os.path.basename(self.file_1))[0]
-            #   self.file_1 = self.file_1_path_gz
             self.file_1 = self.file_1_path
         if self.Trim and self.win_size is None:
             print(colored("\nArgument Error: Provide valid Window size\n", "red"))
@@ -357,6 +356,14 @@ class FilterSingle:
                 temp_file = open(f, 'r')
                 for line in temp_file:
                     filter_out.write(line)
+
+        if self.out_fmt == "fastq" and self.compress:
+            cmd_compress = ["gzip", filter_out]
+            p1 = subprocess.Popen(cmd_compress)
+            p1.wait()
+            if p1.returncode != 0:
+                print(colored("Error: during compression file", "red"))
+                sys.exit(1)
 
         stat_parse = StatisticSingle.StatisticSingle(self.raw_out_dir1+'/'+'StatTemp.txt')
         stat_parse.stat_single(self.n_base, self.qual_thresh, self.min_size, self.adapter, self.Trim, self.min_len,
