@@ -452,6 +452,21 @@ class FilterPair:
             sys.exit(1)
         self.merge_files(all_files_out_1, filter_out_1)
         self.merge_files(all_files_out_2, filter_out_2)
+
+        if self.out_fmt == "fastq" and self.compress:
+            cmd_compress_1 = ["gzip", file_p1_basename+'_Clean.fastq']
+            p1 = subprocess.Popen(cmd_compress_1)
+            p1.wait()
+            if p1.returncode != 0:
+                print(colored("Error: during compression file", "red"))
+                sys.exit(1)
+            cmd_compress_2 = ["gzip", file_p2_basename+'_Clean.fastq']
+            p2 = subprocess.Popen(cmd_compress_2)
+            p2.wait()
+            if p2.returncode != 0:
+                print(colored("Error: during compression file", "red"))
+                sys.exit(1)
+
         shutil.rmtree(raw_dir_1)
         shutil.rmtree(raw_dir_2)
         shutil.rmtree(self.raw_out_dir_1)
@@ -467,20 +482,6 @@ class FilterPair:
                 temp_file = open(f, 'r')
                 for line in temp_file:
                     filter_out.write(line)
-
-        if self.out_fmt == "fastq" and self.compress:
-            cmd_compress_1 = ["gzip", file_p1_basename+'_Clean.fastq']
-            p1 = subprocess.Popen(cmd_compress_1)
-            p1.wait()
-            if p1.returncode != 0:
-                print(colored("Error: during compression file", "red"))
-                sys.exit(1)
-            cmd_compress_2 = ["gzip", file_p2_basename+'_Clean.fastq']
-            p2 = subprocess.Popen(cmd_compress_2)
-            p2.wait()
-            if p2.returncode != 0:
-                print(colored("Error: during compression file", "red"))
-                sys.exit(1)
 
     def filter_data(self, fastq_file_1, fastq_file_2, i):
         max_read_len_1 = 0; min_read_len_1 = 1000000
