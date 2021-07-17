@@ -358,7 +358,7 @@ class FilterSingle:
                     filter_out.write(line)
 
         if self.out_fmt == "fastq" and self.compress:
-            cmd_compress = ["gzip", filter_out]
+            cmd_compress = ["gzip", file_s_basename+'_Clean.fastq']
             p1 = subprocess.Popen(cmd_compress)
             p1.wait()
             if p1.returncode != 0:
