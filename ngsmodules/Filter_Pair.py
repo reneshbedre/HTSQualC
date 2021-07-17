@@ -461,6 +461,13 @@ class FilterPair:
         if self._gzip_2:
             os.remove(self.file_p2)
 
+    def merge_files(self, all_files_out, filter_out):
+        for f in all_files_out:
+            if not f.endswith('.txt'):
+                temp_file = open(f, 'r')
+                for line in temp_file:
+                    filter_out.write(line)
+
         if self.out_fmt == "fastq" and self.compress:
             cmd_compress_1 = ["gzip", file_p1_basename+'_Clean.fastq']
             p1 = subprocess.Popen(cmd_compress_1)
@@ -468,19 +475,12 @@ class FilterPair:
             if p1.returncode != 0:
                 print(colored("Error: during compression file", "red"))
                 sys.exit(1)
-            cmd_compress_2 = ["gzip", file_p2_basename + '_Clean.fastq']
+            cmd_compress_2 = ["gzip", file_p2_basename+'_Clean.fastq']
             p2 = subprocess.Popen(cmd_compress_2)
             p2.wait()
             if p2.returncode != 0:
                 print(colored("Error: during compression file", "red"))
                 sys.exit(1)
-       
-    def merge_files(self, all_files_out, filter_out):
-        for f in all_files_out:
-            if not f.endswith('.txt'):
-                temp_file = open(f, 'r')
-                for line in temp_file:
-                    filter_out.write(line)
 
     def filter_data(self, fastq_file_1, fastq_file_2, i):
         max_read_len_1 = 0; min_read_len_1 = 1000000
