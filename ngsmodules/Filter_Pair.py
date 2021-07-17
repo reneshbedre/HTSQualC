@@ -131,7 +131,7 @@ class FilterPair:
                 # self.usage()
                 # parser.print_help()
                 sys.exit(1)
-            option, args = getopt.getopt(sys.argv[1:], "ha:b:c:d:e:f:g:i:j:k:l:m:n:p:q:r:s:t:v:", ["p1=",
+            option, args = getopt.getopt(sys.argv[1:], "ha:b:c:d:e:f:g:i:j:k:l:m:n:p:q:r:s:t:v:z:", ["p1=",
                                                                                                    "p2=",
                                                                                                    "qfmt=",
                                                                                                    "msz=",
@@ -149,7 +149,8 @@ class FilterPair:
                                                                                                    "mlk=",
                                                                                                    "pipeline_flag=",
                                                                                                    "out=",
-                                                                                                   "no-vis="])
+                                                                                                   "no-vis=",
+                                                                                                   "compress="])
         except getopt.GetoptError:
             print(colored("\nError: wrong input parameter. check command\n", "red"))
             # self.usage()
@@ -233,6 +234,13 @@ class FilterPair:
                     sys.exit(1)
                 elif self.no_vis == 'False':
                     self.no_vis = None
+            elif opt in ("-z", "--compress"):
+                self.compress = value
+                if self.compress not in ['True', 'False']:
+                    print(colored('Error: Unknown output compress parameter [True|False]\n', "red"))
+                    sys.exit(1)
+                elif self.compress == 'False':
+                    self.compress = None
             else:
                 print(colored('Error: in input parameters\n', "red"))
                 # self.usage()
@@ -449,12 +457,24 @@ class FilterPair:
         shutil.rmtree(self.raw_out_dir_1)
         shutil.rmtree(self.raw_out_dir_2)
         if self._gzip_1:
-            #   os.remove(self.file_1_path+'/'+self.file_p1)
             os.remove(self.file_p1)
         if self._gzip_2:
-            #   os.remove(self.file_1_path+'/'+self.file_p2)
             os.remove(self.file_p2)
 
+        if self.out_fmt == "fastq" and self.compress:
+            cmd_compress_1 = ["gzip", file_p1_basename+'_Clean.fastq']
+            p1 = subprocess.Popen(cmd_compress_1)
+            p1.wait()
+            if p1.returncode != 0:
+                print(colored("Error: during compression file", "red"))
+                sys.exit(1)
+            cmd_compress_2 = ["gzip", file_p2_basename + '_Clean.fastq']
+            p2 = subprocess.Popen(cmd_compress_2)
+            p2.wait()
+            if p2.returncode != 0:
+                print(colored("Error: during compression file", "red"))
+                sys.exit(1)
+       
     def merge_files(self, all_files_out, filter_out):
         for f in all_files_out:
             if not f.endswith('.txt'):
