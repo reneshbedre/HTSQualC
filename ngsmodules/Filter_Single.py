@@ -126,6 +126,7 @@ class FilterSingle:
                 self.file_1 = value
                 if os.path.exists(self.file_1):
                     if 'gz' in self.file_1:
+                        print(self.file_1)
                         self.file_1 = os.path.abspath(os.path.splitext(self.file_1)[0])
                         self.pathname = os.path.dirname(self.file_1)
                         self.pathname = os.path.abspath(self.pathname)
