@@ -126,12 +126,12 @@ class FilterSingle:
                 self.file_1 = value
                 if os.path.exists(self.file_1):
                     if 'gz' in self.file_1:
-                        self.file_1 = os.path.abspath(os.path.splitext(self.file_1)[0])
+                        self.file_1_path = os.path.abspath(os.path.splitext(self.file_1)[0])
                         self.pathname = os.path.dirname(self.file_1)
                         self.pathname = os.path.abspath(self.pathname)
                         #   for gz uncompressed file
                         self.file_1_path_gz = self.file_1_path
-                        print(self.file_1)
+                        print(self.file_1, self.file_1_path)
                     else:
                         self.file_1 = os.path.abspath(self.file_1)
                         self.pathname = os.path.dirname(self.file_1)
