@@ -1,5 +1,5 @@
-# HTSeqQC
-HTSeqQC is an automated quality control analysis tool for a single and 
+# HTSQualC
+HTSQualC is an automated quality control analysis tool for a single and 
 paired-end high-throughput sequencing data (HTS) generated from Illumina
 sequencing platforms.
 
@@ -17,9 +17,9 @@ sequencing platforms.
 ## Getting Started
 
 ### Prerequisites
-You need Python 3 (tested on 3.6 and 3.7) to install and run HTSeqQC. Following Python 3 
-packages need to install before running the HTSeqQC. If you have not .
-installed these packages, HTSeqQC will guide you to install them.
+You need Python 3 (tested on 3.6 and 3.7) to install and run HTSQualC. Following Python 3 
+packages need to install before running the HTSQualC. If you have not .
+installed these packages, HTSQualC will guide you to install them.
 
 ```
 numpy
@@ -31,13 +31,13 @@ datetime
 
 ### Installing
 
-Clone or download HTSeqQC using following command,
+Clone or download HTSQualC using following command,
 
 ```
-git clone https://github.com/reneshbedre/HTSeqQC.git
+git clone https://github.com/reneshbedre/HTSQualC.git
 ```
 
-To install HTSeqQC, run following command in the root folder,
+To install HTSQualC, run following command in the root folder,
 
 ```
 python setup.py install
@@ -111,6 +111,9 @@ optional arguments:
   -v VIS_OPT, --no-vis VIS_OPT
                         No figures will be produced [True|False]
                         [default:False]
+  -z COMPRESS, --compress COMPRESS
+                        Compress (.gz) the filtered FASTQ output [True|False]   
+                        [default:False]                   
   --version             show program's version number and exit
 ```
 
@@ -134,7 +137,7 @@ filter.py OPTIONS -a fastq_file_left_1,fastq_file_left_2 -b fastq_file_right_1,f
 ```
 
 ### Output
-HTSeqQC produces the filtered cleaned HTS data as FASTQ/FASTA files, 
+HTSQualC produces the filtered cleaned HTS data as FASTQ/FASTA files, 
 and statistics and visualization of filtered cleaned HTS datasets. The
 output will be saved in folder with name ending as filtering_out.
 
@@ -142,7 +145,7 @@ output will be saved in folder with name ending as filtering_out.
 
 This project is available under the MIT License. See complete details in [LICENSE](LICENSE) file.
 
-### HTSeqQC Analysis commands used for test datasets
+### HTSQualC Analysis commands used for test datasets
 
 **Download the test paired and single end data using NCBI SRA toolkit**
 ```
@@ -152,7 +155,7 @@ fastq-dump --split-files SRR2165178
 fastq-dump  SRR1805340
 ```
 
-*Run HTSeqQC as a command line tool (Linux and Mac)*
+*Run HTSQualC as a command line tool (Linux and Mac)*
 - for paired end data with default parameter (setting 1)
 
 `filter.py --cpu 18 --p1 SRR2165176_1.fastq --p2 SRR2165176_2.fastq`
