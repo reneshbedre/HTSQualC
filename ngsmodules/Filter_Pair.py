@@ -489,10 +489,10 @@ class FilterPair:
         shutil.rmtree(raw_dir_2)
         shutil.rmtree(self.raw_out_dir_1)
         shutil.rmtree(self.raw_out_dir_2)
-        if self._gzip_1:
-            os.remove(self.file_p1)
-        if self._gzip_2:
-            os.remove(self.file_p2)
+        # if self._gzip_1:
+        #    os.remove(self.file_p1)
+        # if self._gzip_2:
+        #    os.remove(self.file_p2)
 
     def merge_files(self, all_files_out, filter_out):
         for f in all_files_out:
