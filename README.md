@@ -60,7 +60,7 @@ filter.py -h
 usage: filter.py [-h] [-a INPUT_FILES_1] [-b INPUT_FILES_2] [-c QUAL_FMT]
                  [-e N_CONT] [-f ADPT_SEQS] [-d MIN_SIZE] [-g ADPT_MATCH]
                  [-i QUAL_THRESH] [-n TRIM_OPT] [-p WIND_SIZE]
-                 [-r MIN_LEN_FILT] [-q CPU] [-m OUT_FMT] [-v VIS_OPT]
+                 [-r MIN_LEN_FILT] [-q CPU] [-m OUT_FMT] [-v VIS_OPT] [-z COMPRESS]
                  [--version]
 
 Quality control analysis of single and paired-end sequence data

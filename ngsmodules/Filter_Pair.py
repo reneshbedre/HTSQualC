@@ -167,6 +167,7 @@ class FilterPair:
                     self.pathname = os.path.dirname(self.file_p1)
                     self.pathname = os.path.abspath(self.pathname)
                     self.file_1_path = self.pathname
+                    print(self.file_p1, 'a')
                 else:
                     print(colored("\nError : The given input file does not exist. Rerun the program by giving correct "
                                   "input file\n", "red"))
@@ -298,6 +299,7 @@ class FilterPair:
             sys.exit(1)
         if self.qual_format is None:
             if self.file_p1 and self.file_p2 and os.path.isfile(self.file_p1) and os.path.isfile(self.file_p2):
+                print(self.file_p1, 'b')
                 print("["+str(datetime.now())+"] The fastq quality format is not provided therefore detecting the " \
                                               "fastq variant...")
                 self.qual_format = self.detect_fastq_variant()

@@ -1,4 +1,4 @@
-# Dockerfile for HTSeqQC container
+# Dockerfile for HTSQualC container
 # load ubuntu 18.04
 FROM ubuntu:18.04
 
@@ -27,9 +27,9 @@ ENV PROJDIR /project
 RUN mkdir -p $PROJDIR
 WORKDIR $PROJDIR
 
-# clone and install HTSeqQC
-RUN git clone https://github.com/reneshbedre/HTSeqQC.git
-WORKDIR $PROJDIR/HTSeqQC
+# clone and install HTSQualC
+RUN git clone https://github.com/reneshbedre/HTSQualC.git
+WORKDIR $PROJDIR/HTSQualC
 RUN python3 setup.py install
 
 # execute filter.py command when container runs
