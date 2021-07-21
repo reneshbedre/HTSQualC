@@ -213,7 +213,7 @@ class FilterSingle:
                 sys.exit(1)
 
         if 'gz' in self.file_1:
-            print("["+str(datetime.now())+"] The fastq file is in gz format and uncompressing it...")
+            # print("["+str(datetime.now())+"] The fastq file is in gz format and uncompressing it...")
             self._gzip_1 = True
             cmd = ["gunzip", self.file_1]
             p1 = subprocess.Popen(cmd)
