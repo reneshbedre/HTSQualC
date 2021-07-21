@@ -264,7 +264,7 @@ class FilterPair:
                 sys.exit(1)
 
         if 'gz' in self.file_p1:
-            print("["+str(datetime.now())+"] The fastq file is in gz format and uncompressing it...")
+            # print("["+str(datetime.now())+"] The fastq file is in gz format and uncompressing it...")
             self._gzip_1 = True
             cmd = ["gunzip", self.file_p1]
             p1 = subprocess.Popen(cmd)
@@ -289,9 +289,9 @@ class FilterPair:
         if 'gz' in self.file_p2:
             self._gzip_2 = True
             cmd = ["gunzip", self.file_p2]
-            p1 = subprocess.Popen(cmd)
-            p1.wait()
-            if p1.returncode != 0:
+            p2 = subprocess.Popen(cmd)
+            p2.wait()
+            if p2.returncode != 0:
                 print(colored("Error: during uncompress file", "red"))
                 sys.exit(1)
             self.file_p2 = self.file_2_filename
