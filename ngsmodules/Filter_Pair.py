@@ -165,11 +165,12 @@ class FilterPair:
                 self.file_p1 = value
                 if os.path.exists(self.file_p1):
                     if 'gz' in self.file_p1:
-                        self.file_1_path = os.path.abspath(os.path.splitext(self.file_p1)[0])
+                        self.file_1_filename = os.path.abspath(os.path.splitext(self.file_p1)[0])
                         self.pathname = os.path.dirname(self.file_p1)
                         self.pathname = os.path.abspath(self.pathname)
                         #   for gz uncompressed file
-                        self.file_1_path_gz = self.file_1_path
+                        # self.file_1_path_gz = self.file_1_path
+                        self.file_1_path = self.pathname
                     else:
                         self.pathname = os.path.dirname(self.file_p1)
                         self.pathname = os.path.abspath(self.pathname)
@@ -184,11 +185,12 @@ class FilterPair:
                 self.file_p2 = value
                 if os.path.exists(self.file_p2):
                     if 'gz' in self.file_p2:
-                        self.file_2_path = os.path.abspath(os.path.splitext(self.file_p2)[0])
+                        self.file_2_filename = os.path.abspath(os.path.splitext(self.file_p2)[0])
                         self.pathname = os.path.dirname(self.file_p2)
                         self.pathname = os.path.abspath(self.pathname)
                         #   for gz uncompressed file
-                        self.file_2_path_gz = self.file_2_path
+                        # self.file_2_path_gz = self.file_2_path
+                        self.file_2_path = self.pathname
                     else:
                         self.pathname2 = os.path.dirname(self.file_p2)
                         self.pathname2 = os.path.abspath(self.pathname2)
@@ -270,8 +272,7 @@ class FilterPair:
             if p1.returncode != 0:
                 print(colored("Error: during uncompress file", "red"))
                 sys.exit(1)
-            self.file_p1 = self.file_1_path
-
+            self.file_p1 = self.file_1_filename
             '''
             read_file = gzip.GzipFile(self.file_p1, 'rb')
             temp = read_file.read()
@@ -293,7 +294,7 @@ class FilterPair:
             if p1.returncode != 0:
                 print(colored("Error: during uncompress file", "red"))
                 sys.exit(1)
-            self.file_p2 = self.file_2_path
+            self.file_p2 = self.file_2_filename
 
             '''
             read_file = gzip.GzipFile(self.file_p2, 'rb')
