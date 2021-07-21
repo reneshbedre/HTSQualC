@@ -164,7 +164,7 @@ class FilterPair:
             elif opt in ("-a", "--p1"):
                 self.file_p1 = value
                 if os.path.exists(self.file_p1):
-                    if 'gz' in self.file_1:
+                    if 'gz' in self.file_p1:
                         self.file_1_path = os.path.abspath(os.path.splitext(self.file_p1)[0])
                         self.pathname = os.path.dirname(self.file_p1)
                         self.pathname = os.path.abspath(self.pathname)
