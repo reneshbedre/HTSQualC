@@ -164,10 +164,16 @@ class FilterPair:
             elif opt in ("-a", "--p1"):
                 self.file_p1 = value
                 if os.path.exists(self.file_p1):
-                    self.pathname = os.path.dirname(self.file_p1)
-                    self.pathname = os.path.abspath(self.pathname)
-                    self.file_1_path = self.pathname
-                    print(self.file_p1, 'a')
+                    if 'gz' in self.file_1:
+                        self.file_1_path = os.path.abspath(os.path.splitext(self.file_p1)[0])
+                        self.pathname = os.path.dirname(self.file_p1)
+                        self.pathname = os.path.abspath(self.pathname)
+                        #   for gz uncompressed file
+                        self.file_1_path_gz = self.file_1_path
+                    else:
+                        self.pathname = os.path.dirname(self.file_p1)
+                        self.pathname = os.path.abspath(self.pathname)
+                        self.file_1_path = self.pathname
                 else:
                     print(colored("\nError : The given input file does not exist. Rerun the program by giving correct "
                                   "input file\n", "red"))
@@ -177,9 +183,16 @@ class FilterPair:
             elif opt in ("-b", "--p2"):
                 self.file_p2 = value
                 if os.path.exists(self.file_p2):
-                    self.pathname2 = os.path.dirname(self.file_p2)
-                    self.pathname2 = os.path.abspath(self.pathname2)
-                    self.file_2_path = self.pathname2
+                    if 'gz' in self.file_p2:
+                        self.file_2_path = os.path.abspath(os.path.splitext(self.file_p2)[0])
+                        self.pathname = os.path.dirname(self.file_p2)
+                        self.pathname = os.path.abspath(self.pathname)
+                        #   for gz uncompressed file
+                        self.file_2_path_gz = self.file_2_path
+                    else:
+                        self.pathname2 = os.path.dirname(self.file_p2)
+                        self.pathname2 = os.path.abspath(self.pathname2)
+                        self.file_2_path = self.pathname2
             elif opt in ("-c", "--qfmt"):
                 self.qual_format = int(value)
                 if self.qual_format == 0:
@@ -257,6 +270,7 @@ class FilterPair:
             if p1.returncode != 0:
                 print(colored("Error: during uncompress file", "red"))
                 sys.exit(1)
+            self.file_p1 = self.file_1_path
 
             '''
             read_file = gzip.GzipFile(self.file_p1, 'rb')
@@ -279,6 +293,7 @@ class FilterPair:
             if p1.returncode != 0:
                 print(colored("Error: during uncompress file", "red"))
                 sys.exit(1)
+            self.file_p2 = self.file_2_path
 
             '''
             read_file = gzip.GzipFile(self.file_p2, 'rb')
